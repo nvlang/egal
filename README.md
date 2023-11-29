@@ -33,8 +33,8 @@ tsx src/generate.ts
 ## Background information
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/graphics/egal-palettes-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/graphics/egal-palettes-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/graphics/egal-palettes-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/graphics/egal-palettes-light.png">
   <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="assets/graphics/egal-palettes-light.svg">
 </picture>
 
