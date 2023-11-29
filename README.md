@@ -14,7 +14,7 @@ What this project aims to do is to build on Google's material color utilities to
 
 ## Usage
 
-**TODO**: Expand this section
+**TODO**: Expand this section.
 
 ### Installation
 
