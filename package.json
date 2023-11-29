@@ -1,0 +1,12 @@
+{
+    "dependencies": {
+        "@material/material-color-utilities": "^0.2.7",
+        "ase-util": "^1.0.3",
+        "ase-utils": "^0.1.1"
+    },
+    "type": "module",
+    "devDependencies": {
+        "@types/node": "^20.5.9",
+        "tsx": "^3.12.7"
+    }
+}
