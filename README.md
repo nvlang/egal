@@ -14,7 +14,7 @@ What this project aims to do is to build on Google's material color utilities to
 
 ## Usage
 
-**TODO**: Expand this section
+**TODO**: Expand this section.
 
 ### Installation
 
@@ -31,6 +31,8 @@ tsx src/generate.ts
 ```
 
 ## Background information
+
+**TODO**: Expand this section.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/graphics/egal-palettes-dark.png">
