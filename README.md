@@ -32,6 +32,8 @@ tsx src/generate.ts
 
 ## Background information
 
+**TODO**: Expand this section.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/graphics/egal-palettes-dark.png">
   <source media="(prefers-color-scheme: light)" srcset="assets/graphics/egal-palettes-light.png">
