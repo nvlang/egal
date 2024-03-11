@@ -6,7 +6,7 @@
     },
     "type": "module",
     "devDependencies": {
-        "@types/node": "^20.11.24",
+        "@types/node": "^20.11.25",
         "tsx": "^3.12.7"
     }
 }
