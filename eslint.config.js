@@ -33,8 +33,8 @@ export default tseslint.config(
         files: ['{src,tests}/**/*.ts'],
         extends: [
             eslint.configs.recommended,
-            ...tseslint.configs.stylisticTypeChecked,
-            ...tseslint.configs.strictTypeChecked,
+            tseslint.configs.stylisticTypeChecked,
+            tseslint.configs.strictTypeChecked,
         ],
         languageOptions: {
             parser: tseslint.parser,
@@ -52,6 +52,7 @@ export default tseslint.config(
         rules: {
             'tsdoc/syntax': 'warn',
             '@typescript-eslint/no-inferrable-types': 'off',
+            '@typescript-eslint/restrict-template-expressions': 'off',
         },
     },
     {
@@ -63,7 +64,10 @@ export default tseslint.config(
         // Vitest test files
         files: ['tests/unit/**/*.{test,spec}.ts'],
         plugins: { vitest },
-        rules: vitest.configs.recommended.rules,
+        rules: {
+            ...vitest.configs.recommended.rules,
+            'vitest/expect-expect': 'off',
+        },
         languageOptions: {
             globals: vitest.environments.env.globals,
         },
@@ -72,7 +76,7 @@ export default tseslint.config(
         // Playwright test files
         files: ['tests/e2e/**/*.{test,spec}.ts'],
         plugins: { playwright },
-        rules: playwright.configs.recommended.rules,
+        extends: [playwright.configs.recommended.rules],
     },
     prettierConfig,
 );
