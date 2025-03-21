@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/graphics/egal-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/graphics/egal-light.svg">
-  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="assets/graphics/egal-light.svg">
+  <img alt="égal: uniform color palettes" src="assets/graphics/egal-light.svg">
 </picture>
 
 ## Raison d'être
