@@ -185,22 +185,22 @@ export const defaultOptions = {
  *
  * @privateRemarks
  *
- * -    **PRE:**
- *      -   `lightness ∈ ℝ ∪ {-∞, ∞, NaN}`
- *      -   `chroma ∈ ℝ ∪ {-∞, ∞, NaN}`
- *      -   `hue ∈ ℝ ∪ {-∞, ∞, NaN}`
- * -    **POST:** `output` is a string as described above.
+ * -   **PRE:**
+ *     -   `lightness ∈ ℝ ∪ {-∞, ∞, NaN}`
+ *     -   `chroma ∈ ℝ ∪ {-∞, ∞, NaN}`
+ *     -   `hue ∈ ℝ ∪ {-∞, ∞, NaN}`
+ * -   **POST:** `output` is a string as described above.
  */
 export function egal<OF extends OutputFormat = 'oklch'>(
     lightness: number,
     chroma: number,
     hue: number,
-    options: EgalOptions<OF> & FindChromaOptions = {},
+    options: EgalOptions<OF> = {},
 ): OutputColor<OF> {
     // Filter out options set to undefined
     const filteredOptions = Object.fromEntries(
         Object.entries(options).filter(([, value]) => value !== undefined),
-    ) as EgalOptions<OF> & FindChromaOptions;
+    ) as EgalOptions<OF>;
 
     // Merge options with defaults.
     const mergedOptions = {
@@ -323,8 +323,8 @@ export const Thresholds = {
 } as const;
 
 /**
- * - **PRE:** `p ∈ ℝ ∪ {-∞, ∞, NaN}`, `space ∈ {'oklch', 'hct'}`
- * - **POST:** `output ∈ [Thresholds.precision[space].min, Thresholds.precision[space].max]`
+ * -   **PRE:** `p ∈ ℝ ∪ {-∞, ∞, NaN}`, `space ∈ {'oklch', 'hct'}`
+ * -   **POST:** `output ∈ [Thresholds.precision[space].min, Thresholds.precision[space].max]`
  *
  * @param p - The precision to sanitize.
  * @returns The sanitized precision.

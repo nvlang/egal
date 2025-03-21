@@ -1,5 +1,9 @@
 export type ColorSpace = 'hct' | 'oklch';
 export type Gamut = 'srgb' | 'p3' | 'rec2020';
+
+/**
+ * Possible output color formats.
+ */
 export type OutputFormat =
     | 'hsl'
     | 'hwb'
@@ -11,6 +15,16 @@ export type OutputFormat =
 
 export type CacheKey = `${number}_${string}_${ColorSpace}_${Gamut}_${number}`;
 
+/**
+ * Template string type for CSS-parsable string representation of color in type
+ * parameter's format.
+ *
+ * @example
+ * ```ts
+ * const color1: OutputColor<'hsl'> = 'hsl(10 10% 10%)';
+ * const color2: OutputColor<'hsl'> = 'hsl(10 10% 10% / 0.5)';
+ * ```
+ */
 export type OutputColor<OF extends OutputFormat> = OF extends 'hsl'
     ? HslColor
     : OF extends 'hwb'
@@ -49,42 +63,10 @@ export type SrgbColor =
     | `rgb(${number}% ${number}% ${number}%)`
     | `rgb(${number}% ${number}% ${number}% / ${number})`;
 
-export interface FindChromaOptions {
-    /**
-     * Color space within which the `hue` and `luminosity` are to be
-     * interpreted.
-     *
-     * @defaultValue
-     * ```ts
-     * 'oklch'
-     * ```
-     */
-    space?: ColorSpace;
-
-    /**
-     * Target gamut. For example, the max chroma (such that the color is still
-     * in the target gamut) for a given hue and luminosity will be different for
-     * sRGB, P3, and Rec. 2020.
-     *
-     * @defaultValue
-     * ```ts
-     * 'srgb'
-     * ```
-     */
-    gamut?: Gamut;
-
-    /**
-     * Precision with which to find the chroma. For example, a precision of
-     * `0.1` would ensure that the returned maximum chroma is within `0.1` of
-     * the actual maximum chroma.
-     *
-     * @defaultValue
-     * ```ts
-     * 0.1
-     * ```
-     */
-    precision?: number;
-}
+export type FindChromaOptions = Pick<
+    EgalOptions<OutputFormat>,
+    'gamut' | 'precision' | 'space'
+>;
 
 export interface EgalOptions<OF extends OutputFormat> {
     /**
@@ -178,4 +160,39 @@ export interface EgalOptions<OF extends OutputFormat> {
      * overrule these guardrails.
      */
     guardrails?: boolean;
+
+    /**
+     * Color space within which the `hue` and `luminosity` are to be
+     * interpreted.
+     *
+     * @defaultValue
+     * ```ts
+     * 'oklch'
+     * ```
+     */
+    space?: ColorSpace;
+
+    /**
+     * Target gamut. For example, the max chroma (such that the color is still
+     * in the target gamut) for a given hue and luminosity will be different for
+     * sRGB, P3, and Rec. 2020.
+     *
+     * @defaultValue
+     * ```ts
+     * 'srgb'
+     * ```
+     */
+    gamut?: Gamut;
+
+    /**
+     * Precision with which to find the chroma. For example, a precision of
+     * `0.1` would ensure that the returned maximum chroma is within `0.1` of
+     * the actual maximum chroma.
+     *
+     * @defaultValue
+     * ```ts
+     * 0.1
+     * ```
+     */
+    precision?: number;
 }
