@@ -14,6 +14,12 @@ What this project aims to do is to build on Google's material color utilities to
 
 ## Usage
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/graphics/graph.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/graphics/graph.svg">
+  <img alt="Progressions of max. chroma for fixed hues." src="assets/graphics/graph.svg">
+</picture>
+
 **TODO**: Expand this section.
 
 ### Installation
