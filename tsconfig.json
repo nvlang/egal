@@ -1,17 +1,60 @@
 {
-    "compilerOptions": {
-        "target": "es2022",
-        "lib": [
-            "ES2022",
-            "DOM"
-        ],
-        "strict": true,
-        "module": "CommonJS",
-        "moduleResolution": "Node",
-        "esModuleInterop": true,
-        "allowJs": true
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    // Best practices
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    // Performance
+    "skipLibCheck": true, // recommended
+    // Aliases
+    "baseUrl": "./",
+    "declaration": true,
+    //
+    "esModuleInterop": true, // default: true iff module is "Node16" or "NodeNext"
+    "exactOptionalPropertyTypes": true, // recommended
+    "forceConsistentCasingInFileNames": true, // recommended
+    "importHelpers": true,
+    "lib": ["ESNext"],
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist",
+    "paths": {
+      "$*": ["src/*"],
+      "$tests/*": ["tests/*"]
     },
-    "exclude": [
-        "node_modules",
-    ],
+    "resolveJsonModule": true,
+    // Basic settings
+    "rootDir": ".",
+    // Type-checking
+    "strict": true,
+    "strictNullChecks": true,
+    // Versions and APIs
+    "target": "ES2018"
+  },
+  "exclude": [
+    "coverage",
+    "dist",
+    "external",
+    "node_modules",
+    "static",
+    "tmp",
+    "**/e2e/**"
+  ],
+  "include": [
+    "*.config.js",
+    "*.config.ts",
+    "src",
+    "tests",
+    "scripts",
+    "types/ase-utils.d.ts"
+  ]
 }
