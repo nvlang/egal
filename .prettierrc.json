@@ -1,20 +1,36 @@
 {
-    "printWidth": 100,
-    "tabWidth": 4,
-    "useTabs": false,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "bracketSpacing": true,
-    "insertPragma": false,
-    "proseWrap": "always",
-    "overrides": [
-        {
-            "files": ["*.yml", "*.yaml"],
-            "options": {
-                "tabWidth": 2
-            }
-        }
-    ],
-    "tailwindConfig": "./src/client/tailwind.config.ts"
+  "overrides": [
+    {
+      "files": ["*.ts", "*.mts"],
+      "options": {
+        "parser": "typescript"
+      }
+    },
+    {
+      "files": ["*.json", "*.yaml", "*.yml"],
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": ["*.jsonc"],
+      "options": {
+        "trailingComma": "none",
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": ["pnpm-lock.yaml"],
+      "options": {
+        "printWidth": 130
+      }
+    }
+  ],
+  "printWidth": 80,
+  "proseWrap": "always",
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 4,
+  "trailingComma": "all",
+  "useTabs": false
 }
