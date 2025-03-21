@@ -1,0 +1,51 @@
+{
+  "name": "@nvl/egal",
+  "version": "0.0.0",
+  "description": "Uniform colors",
+  "type": "module",
+  "author": {
+    "name": "N. V. Lang",
+    "email": "npm@nvlang.dev",
+    "url": "https://nvlang.dev/"
+  },
+  "license": "MIT",
+  "module": "./dist/mod.js",
+  "main": "./dist/mod.js",
+  "types": "./dist/mod.d.ts",
+  "private": false,
+  "keywords": [
+    "egal",
+    "postcss",
+    "postcss-plugin",
+    "colors",
+    "oklch",
+    "hct"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nvlang/egal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nvlang/egal/issues"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "colorjs.io": "^0.5.2",
+    "lru-cache": "^11.0.2"
+  },
+  "scripts": {
+    "clean": "rimraf coverage dist tmp",
+    "prebuild": "pnpm run lint",
+    "build": "pnpm run clean && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.json",
+    "lint": "eslint . && tsc -p tsconfig.json --noEmit --skipLibCheck",
+    "test": "vitest run --coverage"
+  }
+}

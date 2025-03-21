@@ -13,7 +13,7 @@ import {
     sanitizeLightness,
     sanitizePrecision,
     Thresholds,
-} from '$egal.js';
+} from '$egal/src/egal.js';
 import Color from 'colorjs.io';
 import type {
     ColorSpace,
@@ -21,7 +21,7 @@ import type {
     FindChromaOptions,
     Gamut,
     OutputFormat,
-} from '$types.js';
+} from '$egal/src/types.js';
 
 describe('egal', () => {
     test.concurrent.each([

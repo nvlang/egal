@@ -28,7 +28,7 @@
     "noUnusedParameters": true,
     "outDir": "./dist",
     "paths": {
-      "$*": ["src/*"],
+      "$*": ["packages/*"],
       "$tests/*": ["tests/*"]
     },
     "resolveJsonModule": true,
@@ -38,8 +38,10 @@
     "strict": true,
     "strictNullChecks": true,
     // Versions and APIs
-    "target": "ES2018"
+    "target": "ES2018",
+    "noEmit": true
   },
+
   "exclude": [
     "coverage",
     "dist",
@@ -52,7 +54,7 @@
   "include": [
     "*.config.js",
     "*.config.ts",
-    "src",
+    "packages/*/src",
     "tests",
     "scripts",
     "types/ase-utils.d.ts"

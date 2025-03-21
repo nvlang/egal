@@ -1,49 +1,13 @@
 {
-  "name": "@nvl/egal",
-  "version": "0.0.0",
-  "description": "Uniform colors",
+  "name": "@nvl/egal-monorepo",
+  "private": true,
   "type": "module",
-  "author": {
-    "name": "N. V. Lang",
-    "email": "npm@nvlang.dev",
-    "url": "https://nvlang.dev/"
-  },
   "license": "MIT",
-  "module": "./dist/mod.js",
-  "main": "./dist/mod.js",
-  "types": "./dist/mod.d.ts",
-  "private": false,
-  "keywords": [
-    "egal",
-    "postcss",
-    "postcss-plugin",
-    "colors",
-    "oklch",
-    "hct"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nvlang/egal.git"
-  },
-  "bugs": {
-    "url": "https://github.com/nvlang/egal/issues"
-  },
-  "homepage": "https://egal.design",
-  "files": [
-    "dist",
-    "package.json",
-    "LICENSE",
-    "README.md"
-  ],
   "engines": {
     "node": ">=16"
   },
   "dependencies": {
-    "@material/material-color-utilities": "^0.3.0",
-    "ase-util": "^1.0.3",
-    "ase-utils": "^0.1.1",
-    "colorjs.io": "^0.5.2",
-    "lru-cache": "^11.0.2"
+    "@nvl/egal": "workspace:*"
   },
   "scripts": {
     "clean": "rimraf coverage dist tmp",

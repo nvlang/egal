@@ -24,7 +24,7 @@ export default defineConfig({
             enabled: true,
             processingConcurrency:
                 os.availableParallelism?.() ?? os.cpus().length,
-            include: ['src/**/*.ts'],
+            include: ['packages/**/*.ts'],
             exclude: [
                 '**/node_modules/**',
                 '**/tests/**',
