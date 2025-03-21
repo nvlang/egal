@@ -68,9 +68,9 @@ export const defaults = {
  * with those hue and lightness values can have while still remaining
  * displayable in the specified color gamut (by default, `'srgb'`).
  *
- * @param hue The hue of the color, in degrees. Must be between 0 and 360.
- * @param lightness The lightness of the color. Must be between 0 and 100.
- * @param opts Options for calculating the maximum chroma.
+ * @param hue - The hue of the color, in degrees. Must be between 0 and 360.
+ * @param lightness - The lightness of the color. Must be between 0 and 100.
+ * @param opts - Options for calculating the maximum chroma.
  * @returns The maximum chroma that a color with the specified hue and lightness
  * can have in the specified viewing conditions.
  */
@@ -119,9 +119,9 @@ export function findMaxChroma(
  * Given a specific lightness, returns the maximum chroma that *all* colors with
  * that lightness can have across the specified hues.
  *
- * @param lightness The lightness for which to find the "chroma floor". Must be
+ * @param lightness - The lightness for which to find the "chroma floor". Must be
  * between 0 and 100, both inclusive.
- * @param opts Options for the calculation the chroma floor.
+ * @param opts - Options for the calculation the chroma floor.
  * @returns The chroma floor, i.e., the minimum of the maximum chromas for each
  * hue-lightness pair.
  */
@@ -134,10 +134,9 @@ export function findChromaFloorForLightness(
 
     // Prepare an array of hues to consider.
     let huesArray: number[];
-    if (hues === undefined || !Array.isArray(hues)) {
+    if (!Array.isArray(hues)) {
         // If hues is not an array, we interpret it as a step value.
         huesArray = [];
-        // If hues is not defined, we use the default hue step.
         const step: number = hues;
         for (
             let hue: number = ColorSpaceConstants[space].hue.min;
@@ -171,16 +170,16 @@ export const defaultOptions = {
 
 /**
  *
- * @param lightness The lightness of the color. Must be between 0 and 100. A
+ * @param lightness - The lightness of the color. Must be between 0 and 100. A
  * lightness of 0 will always result in black (`rgb(0%, 0%, 0%)` or equivalent),
  * and a lightness of 100 will always result in white (`rgb(100%, 100%, 100%)`
  * or equivalent).
- * @param chroma The chroma of the color. Must be a nonnegative number. Values
+ * @param chroma - The chroma of the color. Must be a nonnegative number. Values
  * are interpreted as percentages of the maximal chroma _such that the chroma
  * can be maintained across the specified hues_. A chroma of 0 will result in a
  * grayscale color.
- * @param hue The hue of the color, in degrees. Must be between 0 and 360.
- * @param options Options for the calculation.
+ * @param hue - The hue of the color, in degrees. Must be between 0 and 360.
+ * @param options - Options for the calculation.
  * @returns A string representing the color in the specified output format, such
  * that the color obeys CSS syntax and remains within the specified color gamut.
  *
@@ -203,17 +202,8 @@ export function egal<OF extends OutputFormat = 'oklch'>(
         Object.entries(options).filter(([, value]) => value !== undefined),
     ) as EgalOptions<OF> & FindChromaOptions;
 
-    // Destructure the options, with defaults.
-    let {
-        hues,
-        output,
-        opacity,
-        space,
-        gamut,
-        precision,
-        toeFunction,
-        guardrails,
-    } = {
+    // Merge options with defaults.
+    const mergedOptions = {
         ...defaultOptions,
         ...{
             gamut: defaults.gamut,
@@ -222,6 +212,10 @@ export function egal<OF extends OutputFormat = 'oklch'>(
         },
         ...filteredOptions,
     };
+
+    const { output, space, gamut, toeFunction, guardrails } = mergedOptions;
+
+    let { hues, opacity, precision } = mergedOptions;
 
     // Sanitize and process inputs.
     hue = sanitizeHue(hue);
@@ -254,7 +248,7 @@ export function egal<OF extends OutputFormat = 'oklch'>(
     }
 
     // Set up the cache key.
-    let key: CacheKey = `${lightness}_${
+    const key: CacheKey = `${lightness}_${
         Array.isArray(hues) ? hues.join(',') : String(hues)
     }_${space}_${gamut}_${precision}`;
 
@@ -290,8 +284,8 @@ export function egal<OF extends OutputFormat = 'oklch'>(
 
 /**
  * - **PRE:** `h ∈ ℝ ∪ {-∞, ∞, NaN}`
- * - **POST:** If `h` is finite, then `output ∈ [0, 360)` and `output ≡ h mod
- *   360`. If `h` is not finite, then `output = 0`.
+ * - **POST:** If `h` is finite, then `output ∈ [0, 360)` and
+ *   `output ≡ h mod 360`. If `h` is not finite, then `output = 0`.
  */
 export function sanitizeHue(h: number): number {
     if (Number.isFinite(h)) {
@@ -332,7 +326,7 @@ export const Thresholds = {
  * - **PRE:** `p ∈ ℝ ∪ {-∞, ∞, NaN}`, `space ∈ {'oklch', 'hct'}`
  * - **POST:** `output ∈ [Thresholds.precision[space].min, Thresholds.precision[space].max]`
  *
- * @param p The precision to sanitize.
+ * @param p - The precision to sanitize.
  * @returns The sanitized precision.
  */
 export function sanitizePrecision(p: number, space: ColorSpace): number {
@@ -370,7 +364,7 @@ export function sanitizePrecision(p: number, space: ColorSpace): number {
  * - **PRE:** `h ∈ [0, 360)`
  * - **POST:** `output ∈ [Thresholds.hues.min, 360)`
  *
- * @param h The hue step value to sanitize.
+ * @param h - The hue step value to sanitize.
  * @returns The sanitized hue step value.
  */
 export function sanitizeHues(h: number): number {
@@ -393,7 +387,7 @@ export function sanitizeHues(h: number): number {
  * - **PRE:** `c ∈ ℝ ∪ {-∞, ∞, NaN}`
  * - **POST:** `output ∈ [0, Thresholds.chroma.max]`
  *
- * @param c The chroma to sanitize.
+ * @param c - The chroma to sanitize.
  * @returns The sanitized chroma.
  */
 export function sanitizeChroma(c: number): number {
@@ -427,9 +421,9 @@ export function sanitizeChroma(c: number): number {
  * - **PRE:** `l ∈ ℝ ∪ {-∞, ∞, NaN}`
  * - **POST:** `output ∈ [0, Thresholds.lightness.max]`
  *
- * @param l The lightness to sanitize.
- * @param toeFn Whether a toe function was applied to get `l`.
- * @param lBeforeToeFn If `toeFn` is `true`, this is the lightness before the
+ * @param l - The lightness to sanitize.
+ * @param toeFn - Whether a toe function was applied to get `l`.
+ * @param lBeforeToeFn - If `toeFn` is `true`, this is the lightness before the
  * toe function was applied. If `toeFn` is `false`, this is just `l`.
  * @returns The sanitized lightness.
  *
