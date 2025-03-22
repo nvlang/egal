@@ -1,10 +1,57 @@
+<br>
+<div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/graphics/egal-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/graphics/egal-light.svg">
-  <img alt="égal: uniform color palettes" src="assets/graphics/egal-light.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nvlang/egal/main/res/logotype-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/nvlang/egal/main/res/logotype-light.svg">
+    <img alt="Logotype" src="https://raw.githubusercontent.com/nvlang/egal/main/res/logotype-light.svg" width="40%">
 </picture>
+<br>
+<br>
+<div>
+<!--
+[
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/github/v/tag/nvlang/egal?style=flat-square&logo=GitHub&logoColor=a3acb7&label=&labelColor=21262d&color=21262d">
+    <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/github/v/tag/nvlang/egal?style=flat-square&logo=GitHub&logoColor=24292f&label=&labelColor=eaeef2&color=eaeef2">
+    <img alt="GitHub version tag" src="https://img.shields.io/github/v/tag/nvlang/egal?style=flat-square&logo=GitHub&logoColor=24292f&label=&labelColor=eaeef2&color=eaeef2">
+</picture>
+](https://github.com/nvlang/egal)
+[
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/@nvl/egal-_?style=flat-square&logo=npm&logoColor=a3acb7&labelColor=21262d&color=21262d&logoSize=auto)">
+    <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/@nvl/egal-_?style=flat-square&logo=npm&logoColor=24292f&labelColor=eaeef2&color=eaeef2&logoSize=auto)">
+    <img alt="NPM package name" src="https://img.shields.io/badge/@nvl/egal-_?style=flat-square&logo=npm&logoColor=24292f&labelColor=eaeef2&color=eaeef2&logoSize=auto)">
+</picture>
+](https://npmjs.com/@nvl/egal)
+[
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/@nvl/egal-_?style=flat-square&labelColor=21262d&color=21262d&logo=jsr&logoColor=a3acb7&logoSize=auto">
+    <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/@nvl/egal-_?style=flat-square&labelColor=eaeef2&color=eaeef2&logo=jsr&logoColor=24292f&logoSize=auto">
+    <img alt="JSR package name" src="https://img.shields.io/badge/@nvl/egal-_?style=flat-square&labelColor=eaeef2&color=eaeef2&logo=jsr&logoColor=24292f&logoSize=auto">
+</picture>
+](https://jsr.io/@nvl/egal)
+[
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://jsr.io/badges/@nvl/egal/score?style=flat-square&labelColor=21262d&color=21262d&logoColor=a3acb7">
+    <source media="(prefers-color-scheme: light)" srcset="https://jsr.io/badges/@nvl/egal/score?style=flat-square&labelColor=eaeef2&color=eaeef2&logoColor=24292f">
+    <img alt="JSR score" src="https://jsr.io/badges/@nvl/egal/score?style=flat-square&labelColor=eaeef2&color=eaeef2&logoColor=24292f">
+</picture>
+](https://jsr.io/@nvl/egal)
+[
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/codecov/c/github/nvlang/egal?style=flat-square&logo=codecov&label=&logoColor=a3acb7&labelColor=21262d&color=21262d">
+    <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/codecov/c/github/nvlang/egal?style=flat-square&logo=codecov&label=&logoColor=24292f&labelColor=eaeef2&color=eaeef2">
+    <img alt="CodeCov coverage" src="https://img.shields.io/codecov/c/github/nvlang/egal?style=flat-square&logo=codecov&label=&logoColor=24292f&labelColor=eaeef2&color=eaeef2">
+</picture>
+](https://codecov.io/gh/nvlang/egal) -->
 
-## Raison d'être
+</div>
+</div>
+
+> [!WARNING]
+> This project is under active development, and not yet ready for pretty much any usage.
+
+## Why?
 
 There are many great color systems out there: from classic spot color systems like [PANTONE](https://en.wikipedia.org/wiki/Pantone), [RAL](https://en.wikipedia.org/wiki/RAL_colour_standard), or [ANPA](https://en.wikipedia.org/w/index.php?title=Spot_color&oldid=1180172085#Classification), to widespread digital systems like [X11](https://en.wikipedia.org/wiki/X11_color_names) and [web colors](https://en.wikipedia.org/wiki/Web_colors), to those found in specialized design systems like [Adobe Spectrum](https://spectrum.adobe.com/page/color-palette/), [Apple HIG](https://developer.apple.com/design/human-interface-guidelines/color), [Microsoft FluentUI](https://developer.microsoft.com/fluentui#/styles/web/colors/theme-slots), [TailwindCSS](https://tailwindcss.com/docs/customizing-colors), [IBM Carbon](https://carbondesignsystem.com/guidelines/color/tokens), [VMware Clarity](https://clarity.design/documentation/color), [Google Material](https://m3.material.io/styles/color/the-color-system/tokens), [Github Primer](https://primer.style/foundations/color), etc. So, why another color system?
 
@@ -12,7 +59,7 @@ The answer aligns mostly with the motivation behind Google's [HCT color space](h
 
 What this project aims to do is to build on Google's material color utilities to provide a simple, flexible, and comprehensive way to generate color palettes that are perceptually uniform in both brightness and saturation.
 
-## Usage
+
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/graphics/graph.svg">
@@ -20,39 +67,6 @@ What this project aims to do is to build on Google's material color utilities to
   <img alt="Progressions of max. chroma for fixed hues." src="assets/graphics/graph.svg">
 </picture>
 
-**TODO**: Expand this section.
-
-### Installation
-
-```bash
-git clone https://github.com/nvlang/egal.git
-cd egal
-pnpm install # or npm install or yarn install
-```
-
-### Example
-
-```bash
-tsx src/generate.ts
-```
-
-## Background information
-
-**TODO**: Expand this section.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/graphics/egal-palettes-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="assets/graphics/egal-palettes-light.png">
-  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="assets/graphics/egal-palettes-light.svg">
-</picture>
-
-<!-- <picture>
-  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="assets/graphics/egal-L*.svg">
-</picture> -->
-
-<picture>
-  <img alt="Tonal palettes of 240° hue by ambient L*." src="assets/graphics/egal-tonal-palettes-by-L*.svg">
-</picture>
 
 ## Other Resources
 
