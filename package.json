@@ -14,7 +14,8 @@
     "prebuild": "pnpm run lint",
     "build": "pnpm --recursive build",
     "lint": "eslint . && tsc -p tsconfig.json",
-    "test": "pnpm --recursive test"
+    "test": "pnpm --recursive test",
+    "ci:publish": "pnpm --recursive publish --provenance --access public --no-git-checks && changeset tag"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",

@@ -58,9 +58,7 @@ jobs:
         uses: changesets/action@v1
         with:
           branch: main
-          publish:
-            pnpm --recursive publish --provenance --access public
-            --no-git-checks && changeset tag
+          publish: pnpm ci:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
