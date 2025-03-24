@@ -1,7 +1,7 @@
 {
   "name": "@nvl/egal",
   "version": "0.0.1",
-  "exports": "./mod.ts",
+  "exports": "./src/mod.ts",
   "license": "MIT",
   "publish": {
     "include": [
