@@ -19,12 +19,6 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all history for all branches and tags
 
-      - name: Ensure branch is main
-        run: |
-          git fetch origin main
-          git checkout main
-          git pull origin main
-
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
