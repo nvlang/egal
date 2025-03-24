@@ -6,9 +6,6 @@
   "engines": {
     "node": ">=16"
   },
-  "dependencies": {
-    "@nvl/egal": "workspace:*"
-  },
   "scripts": {
     "clean": "pnpm --recursive clean",
     "prebuild": "pnpm run lint",
@@ -24,18 +21,19 @@
     "@commitlint/types": "^19.5.0",
     "@eslint/js": "^9.23.0",
     "@types/node": "^22.13.0",
-    "colorjs.io": "^0.5.2",
     "commitlint": "^19.7.1",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-playwright": "^2.2.0",
     "eslint-plugin-tsdoc": "^0.4.0",
     "eslint-plugin-vitest": "^0.5.4",
+    "glob": "^11.0.1",
     "husky": "^9.1.7",
+    "jsr": "^0.13.4",
     "knip": "^5.43.6",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
-    "tsx": "^4.19.2",
+    "tsx": "^4.19.3",
     "typescript-eslint": "8.23.0"
   }
 }
