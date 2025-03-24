@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-const src = await import('$egal/src/mod.js');
+const src = await import('../src/mod.js');
 
 describe('src+index', () => {
     it('is an object', () => {

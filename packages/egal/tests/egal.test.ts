@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, test } from 'vitest';
 import { test as fuzzyTest, fc } from '@fast-check/vitest';
-
+import Color from 'colorjs.io';
 import {
     ColorSpaceConstants,
     defaultOptions,
@@ -13,15 +13,14 @@ import {
     sanitizeLightness,
     sanitizePrecision,
     Thresholds,
-} from '$egal/src/egal.js';
-import Color from 'colorjs.io';
+} from '../src/egal.js';
 import type {
     ColorSpace,
     EgalOptions,
     FindChromaOptions,
     Gamut,
     OutputFormat,
-} from '$egal/src/types.js';
+} from '../src/types.js';
 
 describe('egal', () => {
     test.concurrent.each([

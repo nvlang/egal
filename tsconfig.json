@@ -27,10 +27,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "./dist",
-    "paths": {
-      "$*": ["packages/*"],
-      "$tests/*": ["tests/*"]
-    },
     "resolveJsonModule": true,
     // Basic settings
     "rootDir": ".",
@@ -39,9 +35,9 @@
     "strictNullChecks": true,
     // Versions and APIs
     "target": "ES2018",
+    //
     "noEmit": true
   },
-
   "exclude": [
     "coverage",
     "dist",
@@ -53,10 +49,11 @@
   ],
   "include": [
     "*.config.js",
+    "eslint.config.js",
     "*.config.ts",
+    "packages/*/*.config.ts",
     "packages/*/src",
-    "tests",
-    "scripts",
-    "types/ase-utils.d.ts"
+    "packages/*/tests",
+    "scripts"
   ]
 }
