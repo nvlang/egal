@@ -12,7 +12,8 @@
     "build": "pnpm --recursive build",
     "lint": "eslint . && tsc -p tsconfig.json",
     "test": "pnpm --recursive test",
-    "ci:publish": "pnpm --recursive publish --provenance --access public --no-git-checks && changeset tag"
+    "ci:version": "changeset version && pnpm exec tsx scripts/update-jsr-versions.ts",
+    "ci:publish": "pnpm --recursive publish --provenance --access public --no-git-checks && pnpm dlx jsr publish --allow-dirty && changeset tag"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",

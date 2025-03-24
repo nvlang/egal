@@ -1,0 +1,15 @@
+{
+  "name": "@nvl/egal",
+  "version": "0.0.1",
+  "exports": "./mod.ts",
+  "publish": {
+    "include": [
+      "src/**",
+      "package.json",
+      "README.md",
+      "LICENSE",
+      "CHANGELOG.md",
+      "tsconfig.json"
+    ]
+  }
+}

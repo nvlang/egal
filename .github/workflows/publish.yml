@@ -59,6 +59,7 @@ jobs:
         uses: changesets/action@v1
         with:
           branch: main
+          version: pnpm ci:version
           publish: pnpm ci:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
