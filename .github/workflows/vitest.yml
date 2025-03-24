@@ -1,0 +1,65 @@
+---
+name: Unit Tests (Vitest)
+on:
+  push:
+    branches: [main]
+    paths:
+      - packages/*/src/**
+      - packages/*/pnpm-lock.yaml
+      - packages/*/tsconfig.json
+      - packages/*/tsconfig.*.json
+      - tests/unit/**
+      - vitest.config.ts
+      - pnpm-lock.yaml
+      - tsconfig.json
+      - tsconfig.*.json
+  pull_request:
+    branches: [main]
+
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  discussions: write
+  issues: write
+  packages: write
+  pages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: read
+  statuses: write
+
+jobs:
+  test:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+          cache-dependency-path: ./pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Vitest tests
+        run: pnpm test
+
+      - name: Upload coverage reports for `packages/egal` to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: packages/egal/coverage/
+          flags: egal
