@@ -1,5 +1,5 @@
 ---
-name: Publish to NPM
+name: Publish to NPM and JSR
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   publish:
-    name: Publish to NPM
+    name: Publish to NPM and JSR
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,11 +43,11 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Determine Branch
+      - name: Determine current branch
         run:
           echo "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
 
-      - name: Ensure Current Branch is main
+      - name: Ensure current branch is main
         run: |
           if [ "$BRANCH_NAME" != "main" ]; then
             echo "Not on main branch, exiting."
