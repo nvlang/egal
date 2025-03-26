@@ -68,6 +68,11 @@ export type FindChromaOptions = Pick<
     'gamut' | 'precision' | 'space'
 >;
 
+/**
+ * Options for the `egal` function.
+ *
+ * @typeParam OF - Output format.
+ */
 export interface EgalOptions<OF extends OutputFormat> {
     /**
      * Hues to target when calculating the chroma floor. Can also be a number,
