@@ -191,7 +191,7 @@ export const defaultOptions = {
  *     -   `hue ∈ ℝ ∪ {-∞, ∞, NaN}`
  * -   **POST:** `output` is a string as described above.
  */
-export function egal<OF extends OutputFormat = 'oklch'>(
+export function egal<OF extends OutputFormat = OutputFormat>(
     lightness: number,
     chroma: number,
     hue: number,
