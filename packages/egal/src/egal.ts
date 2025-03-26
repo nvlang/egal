@@ -1,6 +1,7 @@
 // External dependencies
 import { LRUCache } from 'lru-cache';
 import Color from 'colorjs.io';
+import { inspect } from 'node:util';
 
 // Internal dependencies
 import type {
@@ -11,7 +12,6 @@ import type {
     OutputFormat,
     ColorSpace,
 } from './types.js';
-import { inspect } from 'node:util';
 
 /**
  * Cache for the chroma floor calculations.
