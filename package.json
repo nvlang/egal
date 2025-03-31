@@ -12,7 +12,7 @@
     "build": "pnpm --recursive build",
     "lint": "eslint . && tsc -p tsconfig.json",
     "test": "pnpm --recursive test",
-    "ci:version": "changeset version && pnpm exec tsx scripts/update-jsr-versions.ts",
+    "ci:version": "changeset version && pnpm exec tsx scripts/update-jsr-versions.ts && pnpm --recursive install --lockfile-only",
     "ci:publish": "pnpm --recursive publish --provenance --access public --no-git-checks && pnpm --recursive exec jsr publish --allow-dirty && changeset tag"
   },
   "devDependencies": {
