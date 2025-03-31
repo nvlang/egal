@@ -63,3 +63,10 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: packages/egal/coverage/
           flags: egal
+
+      - name: Upload coverage reports for `packages/postcss-egal` to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: packages/postcss-egal/coverage/
+          flags: postcss-egal
