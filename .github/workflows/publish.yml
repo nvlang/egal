@@ -54,7 +54,7 @@ jobs:
             exit 1
           fi
 
-      - name: Publish to NPM
+      - name: Publish to NPM and JSR
         id: changesets
         uses: changesets/action@v1
         with:
