@@ -236,6 +236,22 @@ describe('sanitizePrecision', () => {
     );
 });
 
+describe('README examples', () => {
+    test('palette', () => {
+        const hues = [0, 60, 120, 180, 240, 300];
+        const lightnesses = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+        const palette = hues.map((hue) =>
+            lightnesses.map((lightness) => egal(lightness, 100, hue, { hues })),
+        );
+        expect(palette[0]?.[0]).toEqual('oklch(0% 0 none)');
+        expect(palette[0]?.[1]).not.toEqual('oklch(0% 0 none)');
+        expect(palette[0]?.[1]).not.toEqual('oklch(10% 0 none)');
+        expect(palette[0]?.[10]).toEqual('oklch(100% 0 none)');
+        expect(palette[5]?.[0]).toEqual('oklch(0% 0 none)');
+        expect(palette[5]?.[10]).toEqual('oklch(100% 0 none)');
+    });
+});
+
 describe('types', () => {
     test('ColorSpaceConstants', () => {
         expectTypeOf(ColorSpaceConstants).toMatchTypeOf<
