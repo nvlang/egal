@@ -1,6 +1,6 @@
 {
   "name": "@nvl/postcss-egal",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "exports": "./src/mod.ts",
   "license": "MIT",
   "publish": {
