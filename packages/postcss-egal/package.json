@@ -38,7 +38,7 @@
     "node": ">=16"
   },
   "dependencies": {
-    "@nvl/egal": "^0.0.1"
+    "@nvl/egal": "^0.1.0"
   },
   "scripts": {
     "clean": "rimraf coverage dist tmp && true",

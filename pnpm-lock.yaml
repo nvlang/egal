@@ -94,8 +94,8 @@ importers:
   packages/postcss-egal:
     dependencies:
       '@nvl/egal':
-        specifier: ^0.0.1
-        version: 0.0.1
+        specifier: ^0.1.0
+        version: 0.1.0
     devDependencies:
       '@fast-check/vitest':
         specifier: ^0.1.5
@@ -703,8 +703,8 @@ packages:
     resolution: {integrity: sha512-nIh/M6Kh3ZtOmlY00DaUYB4xeeV6F3/ts1l29iwl3/cfyY/OuCfUx+v08zgx8TKPTifXRcjjqVQ4KB2zOYSbyw==}
     engines: {node: '>=18.18.0'}
 
-  '@nvl/egal@0.0.1':
-    resolution: {integrity: sha512-CN4lrxRRQk+RNGFaDScTHQizwpNeD6v2mXuPpEf9FlDRsdmzGbWQowssNIvihYOfMbaC90xqh1+ulw6w110unA==}
+  '@nvl/egal@0.1.0':
+    resolution: {integrity: sha512-iYnOQFIqfAxs0Hp03F6QRtemwJl6yiYWbNaLhK4WXUGMAqht3+qHW/vaAQYbFuV4HSO9wybEXmxvwfukNzd0Tg==}
     engines: {node: '>=16'}
 
   '@pkgjs/parseargs@0.11.0':
@@ -2865,7 +2865,7 @@ snapshots:
       '@nodelib/fs.scandir': 4.0.1
       fastq: 1.19.0
 
-  '@nvl/egal@0.0.1':
+  '@nvl/egal@0.1.0':
     dependencies:
       colorjs.io: 0.5.2
       lru-cache: 11.0.2
