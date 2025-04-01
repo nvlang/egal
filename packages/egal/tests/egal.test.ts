@@ -120,7 +120,7 @@ fuzzyTest.concurrent.prop(
             ),
         }),
     ],
-    { errorWithCause: true, verbose: 2 },
+    { verbose: 2 },
 )('egal output is within gamut', (l, c, h, opts) => {
     const color = new Color(
         egal(l, c, h, opts as EgalOptions<'oklch'> & FindChromaOptions),
