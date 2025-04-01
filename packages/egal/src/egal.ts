@@ -182,15 +182,12 @@ export const defaultOptions = {
  * @param options - Options for the calculation.
  * @returns A string representing the color in the specified output format, such
  * that the color obeys CSS syntax and remains within the specified color gamut.
- *
- * @privateRemarks
- *
- * -   **PRE:**
- *     -   `lightness ∈ ℝ ∪ {-∞, ∞, NaN}`
- *     -   `chroma ∈ ℝ ∪ {-∞, ∞, NaN}`
- *     -   `hue ∈ ℝ ∪ {-∞, ∞, NaN}`
- * -   **POST:** `output` is a string as described above.
  */
+// -   **PRE:**
+//     -   `lightness ∈ ℝ ∪ {-∞, ∞, NaN}`
+//     -   `chroma ∈ ℝ ∪ {-∞, ∞, NaN}`
+//     -   `hue ∈ ℝ ∪ {-∞, ∞, NaN}`
+// -   **POST:** `output` is a string as described above.
 export function egal<OF extends OutputFormat = OutputFormat>(
     lightness: number,
     chroma: number,
