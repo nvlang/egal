@@ -1,7 +1,7 @@
 {
   "name": "@nvl/egal",
   "version": "0.1.2",
-  "description": "Uniform colors",
+  "description": "Reparametrization of OkLCh/HCT to simplify uniformity in color saturation.",
   "type": "module",
   "author": {
     "name": "N. V. Lang",
@@ -15,9 +15,9 @@
   "private": false,
   "keywords": [
     "egal",
-    "postcss",
-    "postcss-plugin",
     "colors",
+    "saturation",
+    "chroma",
     "oklch",
     "hct"
   ],

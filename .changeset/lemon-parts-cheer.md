@@ -3,4 +3,4 @@
 '@nvl/postcss-egal': patch
 ---
 
-Re-release, hopefully with fixed CI.
+Improve package descriptions and keywords.
