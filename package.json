@@ -21,7 +21,7 @@
     "@commitlint/config-conventional": "^19.7.1",
     "@commitlint/types": "^19.5.0",
     "@eslint/js": "^9.23.0",
-    "@types/node": "^22.13.0",
+    "@types/node": "^22.13.17",
     "commitlint": "^19.7.1",
     "deno": "^2.2.6",
     "eslint": "^9.19.0",
