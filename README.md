@@ -82,20 +82,29 @@ _égal_ (IPA /e.ɡal/ — from French, meaning "equal" or "indifferent") does. I
 maps the absolute scale of chromacity embedded in OkLCh into a scale that is
 relative to the aforementioned maximal chromacity.
 
+
+<br>
+<div align="center">
 <picture align="center">
   <source media="(prefers-color-scheme: dark)" srcset="res/oklch-vs-egal-fixed-lightness-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="res/oklch-vs-egal-fixed-lightness-light.svg">
-  <img alt="Progressions of max. chroma for fixed hues." src="res/oklch-vs-egal-fixed-lightness-light.svg">
+  <img alt="Progressions of max. chroma for fixed hues." src="res/oklch-vs-egal-fixed-lightness-light.svg" width="70%">
 </picture>
+</div>
+<br>
 
 The tradeoff here is that we lose consistency of chromacity values across
 lightnesses:
 
-<picture align="center">
+<br>
+<div align="center">
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="res/oklch-vs-egal-fixed-hue-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="res/oklch-vs-egal-fixed-hue-light.svg">
-  <img alt="Progressions of max. chroma for fixed hues." src="res/oklch-vs-egal-fixed-hue-light.svg">
+  <img alt="Progressions of max. chroma for fixed hues." src="res/oklch-vs-egal-fixed-hue-light.svg" width="70%">
 </picture>
+</div>
+<br>
 
 However, given that the consistency of chromacity across lightness was still
 vulnerable to being broken by fallbacks arising from the limitations of the sRGB
