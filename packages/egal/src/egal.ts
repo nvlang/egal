@@ -42,7 +42,7 @@ export const ColorSpaceConstants = {
         props: { hueProp: 'h', chromaProp: 'c', lightnessProp: 't' },
     },
     /**
-     * Globals set by OKLCH; do not modify unless changes to the OKLCH color
+     * Globals set by OkLCh; do not modify unless changes to the OkLCh color
      * system are made.
      */
     oklch: {

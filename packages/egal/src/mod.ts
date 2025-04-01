@@ -12,7 +12,7 @@
  * console.log(egal(50, 100, 100));
  * ```
  *
- * This will output two colors in the `oklch` color space (one with hue 0 and
+ * This will output two colors in the OkLCh color space (one with hue 0 and
  * one with hue 100), which have the same perceived lightness and saturation,
  * and where, if the chroma were increased at all, some hues would not be able
  * to "keep up" with the chroma increase at the same lightness.
