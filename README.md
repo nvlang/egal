@@ -59,13 +59,28 @@
 
 ### Problem
 
-Color spaces like OkLCh and HCT aim to be perceptually uniform, and they can be incredibly useful if consistency of lightness across hues is important. However, it can be difficult to ensure consistency of chromacity (saturation) across hues. This is because not all hues can deliver the same chromacity at a given lightness.
+Color spaces like OkLCh and HCT aim to be perceptually uniform, and they can be
+incredibly useful if consistency of lightness across hues is important. However,
+it can be difficult to ensure consistency of chromacity (saturation) across
+hues. This is because not all hues can deliver the same chromacity at a given
+lightness.
 
-For example, if you take the color <span style="background-color: #5627f8; color: white">`oklch(50% 0.275 280)`</span>, you get a very saturated purple. However, if you shift the hue to 200, you'll find that an sRGB monitor cannot truly display the color `oklch(50% 0.275 200)`, and instead will silently fall back to <span style="background-color: #017176; color: white">`oklch(50% 0.0848 200)`</span>.
+For example, if you take the color <span style="background-color: #5627f8;
+color: white">`oklch(50% 0.275 280)`</span>, you get a very saturated purple.
+However, if you shift the hue to 200, you'll find that an sRGB monitor cannot
+truly display the color `oklch(50% 0.275 200)`, and instead will silently fall
+back to <span style="background-color: #017176; color: white">`oklch(50% 0.0848
+200)`</span>.
 
 ### Idea
 
-Now, how can we make colors of different hues but equal lightness appear equally saturated? One way, of course, is to set the saturation to zero, but this. Alternatively, one can try to find the largest chromacity value that all the different hues can still deliver at the given lightness. That's precisely what _égal_ (IPA /e.ɡal/ — from French, meaning "equal" or "indifferent") does. It maps the absolute scale of chromacity embedded in OkLCh into a scale that is relative to the aforementioned maximal chromacity.
+Now, how can we make colors of different hues but equal lightness appear equally
+saturated? One way, of course, is to set the saturation to zero, but this.
+Alternatively, one can try to find the largest chromacity value that all the
+different hues can still deliver at the given lightness. That's precisely what
+_égal_ (IPA /e.ɡal/ — from French, meaning "equal" or "indifferent") does. It
+maps the absolute scale of chromacity embedded in OkLCh into a scale that is
+relative to the aforementioned maximal chromacity.
 
 <picture align="center">
   <source media="(prefers-color-scheme: dark)" srcset="res/oklch-vs-egal-fixed-lightness-dark.svg">
@@ -73,7 +88,8 @@ Now, how can we make colors of different hues but equal lightness appear equally
   <img alt="Progressions of max. chroma for fixed hues." src="res/oklch-vs-egal-fixed-lightness-light.svg">
 </picture>
 
-The tradeoff here is that we lose consistency of chromacity values across lightnesses:
+The tradeoff here is that we lose consistency of chromacity values across
+lightnesses:
 
 <picture align="center">
   <source media="(prefers-color-scheme: dark)" srcset="res/oklch-vs-egal-fixed-hue-dark.svg">
@@ -81,19 +97,27 @@ The tradeoff here is that we lose consistency of chromacity values across lightn
   <img alt="Progressions of max. chroma for fixed hues." src="res/oklch-vs-egal-fixed-hue-light.svg">
 </picture>
 
-However, given that the consistency of chromacity across lightness was still vulnerable to being broken by fallbacks arising from the limitations of the sRGB (or P3, Rec2020, etc.) color gamut, this tradeoff might not be as bas as it seems, depending on the use case.
+However, given that the consistency of chromacity across lightness was still
+vulnerable to being broken by fallbacks arising from the limitations of the sRGB
+(or P3, Rec2020, etc.) color gamut, this tradeoff might not be as bas as it
+seems, depending on the use case.
 
 ### In Detail
 
 As mentioned before, the core idea behind égal is as follows:
 
-> For a given lightness, find the largest chromacity such that any hue will be still able to deliver that chromacity at the given lightness.
+> For a given lightness, find the largest chromacity such that any hue will be
+> still able to deliver that chromacity at the given lightness.
 
 Now, this can be generalized into the following:
 
-> For a given lightness $\ell$, provide a _linear_ mapping $f_\ell\colon[0,\infty)\to[0,\infty)$ such that $f_\ell(0) = 0$ and $f_\ell(100)$ equals the largest chromacity such that, at the given lightness, any hue will still be able to deliver that chromacity.
+> For a given lightness $\ell$, provide a _linear_ mapping
+> $f_\ell\colon[0,\infty)\to[0,\infty)$ such that $f_\ell(0) = 0$ and
+> $f_\ell(100)$ equals the largest chromacity such that, at the given lightness,
+> any hue will still be able to deliver that chromacity.
 
-These functions $f_\ell$ are then used to define a mapping into the input space of OkLCh as follows:
+These functions $f_\ell$ are then used to define a mapping into the input space
+of OkLCh as follows:
 
 $$
 \begin{aligned}
@@ -102,31 +126,58 @@ $$
 \end{aligned}
 $$
 
-Note that these functions are sensitive to the color gamut that we are targeting, since the maximum chromacity values directly depend on that gamut. This is because the gamut is what specifies when a color is no longer considered displayable. For example, P3 monitors are able to display more saturated colors than sRGB monitors, and therefore the maximum chromacity values for P3 are larger than those for sRGB. Because of this, the target gamut can be specified as an option passed to the egal function.
+Note that these functions are sensitive to the color gamut that we are
+targeting, since the maximum chromacity values directly depend on that gamut.
+This is because the gamut is what specifies when a color is no longer considered
+displayable. For example, P3 monitors are able to display more saturated colors
+than sRGB monitors, and therefore the maximum chromacity values for P3 are
+larger than those for sRGB. Because of this, the target gamut can be specified
+as an option passed to the egal function.
 
-Furthermore, if you prefer to use HCT instead of OkLCh behind the scenes, that's also supported.
+Furthermore, if you prefer to use HCT instead of OkLCh behind the scenes, that's
+also supported.
 
 ## Other Resources
 
 ### Software
 
--   [ColorAide](https://github.com/facelessuser/coloraide): Object-oriented color manipulation library written purely in Python.
--   [HCT Color Converter](https://www.hct-color-converter.com): Online HCT color converter.
--   [HCT Color Picker](https://www.figma.com/community/plugin/1227923985322908257/hct-color-picker): Figma plugin for picking colors in the HCT color space.
--   [Material Color Utilities](https://github.com/material-foundation/material-color-utilities): Google's color libraries for Material Design.
+-   [ColorAide](https://github.com/facelessuser/coloraide): Object-oriented
+    color manipulation library written purely in Python.
+-   [HCT Color Converter](https://www.hct-color-converter.com): Online HCT color
+    converter.
+-   [HCT Color Picker](https://www.figma.com/community/plugin/1227923985322908257/hct-color-picker):
+    Figma plugin for picking colors in the HCT color space.
+-   [Material Color Utilities](https://github.com/material-foundation/material-color-utilities):
+    Google's color libraries for Material Design.
 
 ### Articles
 
--   [Color Appearance Model](https://en.wikipedia.org/wiki/Color_appearance_model): Wikipedia article on color appearance models.
--   [The Science of Color & Design](https://material.io/blog/science-of-color-design): Google's blog post on the HCT color space.
--   [Exploring Tonal Palettes](https://facelessuser.github.io/coloraide/playground/?notebook=https%3A%2F%2Fgist.githubusercontent.com%2Ffacelessuser%2F0235cb0fecc35c4e06a8195d5e18947b%2Fraw%2F3ca56c388735535de080f1974bfa810f4934adcd%2Fexploring-tonal-palettes.md): A Jupyter notebook exploring tonal palettes using the ColorAide library, by the author of the library.
+-   [Color Appearance Model](https://en.wikipedia.org/wiki/Color_appearance_model):
+    Wikipedia article on color appearance models.
+-   [The Science of Color & Design](https://material.io/blog/science-of-color-design):
+    Google's blog post on the HCT color space.
+-   [Exploring Tonal Palettes](https://facelessuser.github.io/coloraide/playground/?notebook=https%3A%2F%2Fgist.githubusercontent.com%2Ffacelessuser%2F0235cb0fecc35c4e06a8195d5e18947b%2Fraw%2F3ca56c388735535de080f1974bfa810f4934adcd%2Fexploring-tonal-palettes.md):
+    A Jupyter notebook exploring tonal palettes using the ColorAide library, by
+    the author of the library.
 
 ### Discussions
 
--   [HCT Color Space](https://news.ycombinator.com/item?id=37308278): Hacker News discussion on the HCT color space, involving its creator.
+-   [HCT Color Space](https://news.ycombinator.com/item?id=37308278): Hacker
+    News discussion on the HCT color space, involving its creator.
 
 ### Color Systems
 
--   Spot color systems: [PANTONE](https://en.wikipedia.org/wiki/Pantone), [RAL](https://en.wikipedia.org/wiki/RAL_colour_standard), [ANPA](https://en.wikipedia.org/w/index.php?title=Spot_color&oldid=1180172085#Classification)
--   Widespread digital color systems: [X11](https://en.wikipedia.org/wiki/X11_color_names), [web colors](https://en.wikipedia.org/wiki/Web_colors)
--   Specialized color systems: [Adobe Spectrum](https://spectrum.adobe.com/page/color-palette/), [Apple HIG](https://developer.apple.com/design/human-interface-guidelines/color), [Microsoft FluentUI](https://developer.microsoft.com/fluentui#/styles/web/colors/theme-slots), [TailwindCSS](https://tailwindcss.com/docs/customizing-colors), [IBM Carbon](https://carbondesignsystem.com/guidelines/color/tokens), [VMware Clarity](https://clarity.design/documentation/color), [Google Material](https://m3.material.io/styles/color/the-color-system/tokens), [Github Primer](https://primer.style/foundations/color), etc.
+-   Spot color systems: [PANTONE](https://en.wikipedia.org/wiki/Pantone),
+    [RAL](https://en.wikipedia.org/wiki/RAL_colour_standard),
+    [ANPA](https://en.wikipedia.org/w/index.php?title=Spot_color&oldid=1180172085#Classification)
+-   Widespread digital color systems:
+    [X11](https://en.wikipedia.org/wiki/X11_color_names),
+    [web colors](https://en.wikipedia.org/wiki/Web_colors)
+-   Specialized color systems: [Adobe Spectrum](https://spectrum.adobe.com/page/color-palette/),
+    [Apple HIG](https://developer.apple.com/design/human-interface-guidelines/color),
+    [Microsoft FluentUI](https://developer.microsoft.com/fluentui#/styles/web/colors/theme-slots),
+    [TailwindCSS](https://tailwindcss.com/docs/customizing-colors),
+    [IBM Carbon](https://carbondesignsystem.com/guidelines/color/tokens),
+    [VMware Clarity](https://clarity.design/documentation/color),
+    [Google Material](https://m3.material.io/styles/color/the-color-system/tokens),
+    [Github Primer](https://primer.style/foundations/color), etc.
