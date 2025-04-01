@@ -119,8 +119,8 @@ export function findMaxChroma(
  * Given a specific lightness, returns the maximum chroma that *all* colors with
  * that lightness can have across the specified hues.
  *
- * @param lightness - The lightness for which to find the "chroma floor". Must be
- * between 0 and 100, both inclusive.
+ * @param lightness - The lightness for which to find the "chroma floor". Must
+ * be between 0 and 100, both inclusive.
  * @param opts - Options for the calculation the chroma floor.
  * @returns The chroma floor, i.e., the minimum of the maximum chromas for each
  * hue-lightness pair.
