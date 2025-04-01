@@ -11,6 +11,7 @@
     "build": "pnpm --recursive build",
     "lint": "eslint . && tsc -p tsconfig.json",
     "test": "pnpm --recursive test",
+    "format": "prettier --write .",
     "ci:version": "changeset version && pnpm exec tsx scripts/update-jsr-versions.ts && pnpm install --no-frozen-lockfile && pnpm run format",
     "ci:publish": "pnpm --recursive publish --provenance --access public --no-git-checks && pnpm --recursive exec jsr publish --allow-dirty && changeset tag"
   },
