@@ -6,7 +6,9 @@ name: Lint and Test
 
 on:
   push:
-    branches: [develop]
+    branches:
+      - develop
+      - main
 
 permissions:
   contents: read
