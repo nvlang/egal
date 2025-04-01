@@ -33,9 +33,9 @@ import { defaultParse } from './utils.js';
  */
 const plugin: PluginCreator<PluginOptions> = (opts: PluginOptions = {}) => {
     let { properties, checkVariables, parse } = opts;
-    if (properties === undefined) properties = cssColorProperties;
-    if (checkVariables === undefined) checkVariables = true;
-    if (parse === undefined) parse = defaultParse;
+    properties ??= cssColorProperties;
+    checkVariables ??= true;
+    parse ??= defaultParse;
     return {
         postcssPlugin: 'postcss-egal',
         Declaration: (decl) => {
