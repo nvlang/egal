@@ -49,8 +49,11 @@
 </div>
 <br>
 
-> [!INFO]
-> **Getting started**: Refer to the README of the [standalone](./packages/egal/README.md#getting-started) package.
+> [!NOTE]
+> **Getting started**: Refer to the README of the
+> [standalone package](./packages/egal/README.md#getting-started) or
+> [PostCSS plugin](./packages/postcss-egal/README.md#getting-started),
+> depending on your use case.
 
 ## Why?
 
