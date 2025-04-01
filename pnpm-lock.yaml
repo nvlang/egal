@@ -84,6 +84,9 @@ importers:
       '@fast-check/vitest':
         specifier: ^0.1.5
         version: 0.1.5(vitest@3.0.5)
+      '@types/node':
+        specifier: ^22.13.0
+        version: 22.13.0
       '@vitest/coverage-v8':
         specifier: ^3.0.5
         version: 3.0.5(vitest@3.0.5)
@@ -103,6 +106,9 @@ importers:
       '@fast-check/vitest':
         specifier: ^0.1.5
         version: 0.1.5(vitest@3.0.5)
+      '@types/node':
+        specifier: ^22.13.0
+        version: 22.13.0
       '@vitest/coverage-v8':
         specifier: ^3.0.5
         version: 3.0.5(vitest@3.0.5)
