@@ -1,5 +1,13 @@
 # @nvl/egal
 
+## 0.1.1
+
+### Patch Changes
+
+- [`9e90f9e`](https://github.com/nvlang/egal/commit/9e90f9e7dc101deed1cc557ca928f80151e5abad)
+  Thanks [@nvlang](https://github.com/nvlang)! - Re-release (hopefully with a
+  fixed CI).
+
 ## 0.1.0
 
 ### Minor Changes
