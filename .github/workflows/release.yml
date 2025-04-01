@@ -10,6 +10,11 @@ on:
       - packages/*/pnpm-lock.yaml
       - packages/*/tsconfig.json
       - packages/*/tsconfig.*.json
+      - packages/*/package.json
+      - packages/*/jsr.json
+      - packages/*/README.md
+      - packages/*/LICENSE
+      - packages/*/CHANGELOG.md
 
 permissions:
   contents: write
