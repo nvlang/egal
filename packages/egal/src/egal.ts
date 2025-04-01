@@ -47,7 +47,7 @@ export const ColorSpaceConstants = {
      */
     oklch: {
         hue: { min: 0, max: 360 },
-        chroma: { min: 0, max: 100 },
+        chroma: { min: 0, max: 1 },
         lightness: { min: 0, max: 1 },
         props: { hueProp: 'h', chromaProp: 'c', lightnessProp: 'l' },
     },

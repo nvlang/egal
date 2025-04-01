@@ -24,8 +24,8 @@ import type {
 
 describe('egal', () => {
     test.concurrent.each([
-        [50, 100, 0, undefined, 'oklch(50% 0.085 0)'],
-        [50, 100, 100, undefined, 'oklch(50% 0.085 100)'],
+        [50, 100, 0, undefined, 'oklch(50% 0.08501 0)'],
+        [50, 100, 100, undefined, 'oklch(50% 0.08501 100)'],
 
         // hues parameter
         [12, 34, 56, { hues: 100 }, 'oklch(12% 0.00696 56)'],
@@ -45,7 +45,7 @@ describe('egal', () => {
         // empty array
         [12, 34, 56, { hues: [] }, 'oklch(12% 0.00696 56)'],
         // normal array
-        [12, 34, 56, { hues: [10, 20, 30] }, 'oklch(12% 0.01636 56)'],
+        [12, 34, 56, { hues: [10, 20, 30] }, 'oklch(12% 0.01637 56)'],
         [12, 34, 56, { hues: [0, 100, 200, 300] }, 'oklch(12% 0.00696 56)'],
         // out of range arrays
         [12, 34, 56, { hues: [0, 0.00001, 300, 400] }, 'oklch(12% 0.01287 56)'],
