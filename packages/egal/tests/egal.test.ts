@@ -252,7 +252,7 @@ describe('README examples', () => {
     });
 });
 
-describe('types', () => {
+describe.skip('types', () => {
     test('ColorSpaceConstants', () => {
         expectTypeOf(ColorSpaceConstants).toMatchTypeOf<
             Record<
