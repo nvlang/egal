@@ -74,7 +74,12 @@ jobs:
             exit 1
           fi
 
-      - name: Publish to NPM and JSR
+      # When you push something to main, this action will first create a PR on a
+      # new branch (`changeset-release/main`), where it'll have applied the
+      # version bumps and changelog edits and such. Then, once you merge that
+      # PR, it'll rerun this action, but this time it'll be publishing the
+      # changes instead of creating a PR.
+      - name: Publish to NPM and JSR or create release PR
         id: changesets
         uses: changesets/action@v1
         with:
@@ -86,4 +91,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push git tags
+        # Don't run this step if the changesets action merely created a PR,
+        # since otherwise we'll get an error about the branch not having an
+        # upstream branch.
+        if: steps.changesets.outputs.published == 'true'
         run: git push --follow-tags
