@@ -100,7 +100,7 @@ importers:
   packages/postcss-egal:
     dependencies:
       '@nvl/egal':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.3
         version: link:../egal
     devDependencies:
       '@fast-check/vitest':
