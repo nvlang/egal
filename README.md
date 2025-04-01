@@ -65,12 +65,12 @@ it can be difficult to ensure consistency of chromaticity (saturation) across
 hues. This is because not all hues can deliver the same chromaticity at a given
 lightness.
 
-For example, if you take the color <span style="background-color: #5627f8;
-color: white">`oklch(50% 0.275 280)`</span>, you get a very saturated purple.
-However, if you shift the hue to 200, you'll find that an sRGB monitor cannot
-truly display the color `oklch(50% 0.275 200)`, and instead will silently fall
-back to <span style="background-color: #017176; color: white">`oklch(50% 0.0848
-200)`</span>.
+For example, if you take the color `oklch(50% 0.275 280)`
+![#5627f8](https://placehold.co/12/5627f8/0000), you get a very saturated
+purple. However, if you shift the hue to 200, you'll find that an sRGB monitor
+cannot truly display the color `oklch(50% 0.275 200)`, and instead will silently
+fall back to `oklch(50% 0.0848 200)`
+![#017176](https://placehold.co/12/017176/0000).
 
 ### Idea
 
