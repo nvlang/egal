@@ -15,6 +15,7 @@ on:
       - packages/*/README.md
       - packages/*/LICENSE
       - packages/*/CHANGELOG.md
+  workflow_dispatch:
 
 permissions:
   contents: write
