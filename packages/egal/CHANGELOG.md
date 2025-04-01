@@ -1,5 +1,13 @@
 # @nvl/egal
 
+## 0.1.3
+
+### Patch Changes
+
+- [`9ee5659`](https://github.com/nvlang/egal/commit/9ee565944d03f3da0107720860dc1a7820e1be1c)
+  Thanks [@nvlang](https://github.com/nvlang)! - Improve package descriptions
+  and keywords.
+
 ## 0.1.2
 
 ### Patch Changes
