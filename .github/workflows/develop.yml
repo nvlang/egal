@@ -1,14 +1,12 @@
 ---
-name: Lint code base
+name: Lint and Test
 
 # Documentation:
 # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
 
 on:
   push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
+    branches: [develop]
 
 permissions:
   contents: read
@@ -46,7 +44,10 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build
+        run: pnpm --filter "@nvl/egal" build
 
       - name: Run ESLint and TypeScript checks
         run: pnpm lint
+
+      - name: Run Vitest tests
+        run: pnpm test

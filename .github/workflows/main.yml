@@ -1,42 +1,30 @@
 ---
-name: Unit Tests (Vitest)
+name: Test and Release
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - packages/*/src/**
       - packages/*/pnpm-lock.yaml
       - packages/*/tsconfig.json
       - packages/*/tsconfig.*.json
-      - tests/unit/**
-      - vitest.config.ts
-      - pnpm-lock.yaml
-      - tsconfig.json
-      - tsconfig.*.json
-  pull_request:
-    branches: [main]
 
 permissions:
-  actions: write
-  checks: write
   contents: write
-  deployments: write
-  discussions: write
-  issues: write
-  packages: write
-  pages: write
-  pull-requests: write
-  repository-projects: write
-  security-events: read
   statuses: write
+  id-token: write
+  pull-requests: write
 
 jobs:
-  test:
-    timeout-minutes: 5
+  publish:
+    name: Publish to NPM and JSR
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
@@ -50,14 +38,15 @@ jobs:
           node-version: lts/*
           cache: pnpm
           cache-dependency-path: ./pnpm-lock.yaml
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: pnpm install
 
       - name: Build
         run: pnpm build
 
-      - name: Run Vitest tests
+      - name: Run Vitest unit tests
         run: pnpm test
 
       - name: Upload coverage reports for `packages/egal` to Codecov
@@ -73,3 +62,28 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: packages/postcss-egal/coverage/
           flags: postcss-egal
+
+      - name: Determine current branch
+        run:
+          echo "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+
+      - name: Ensure current branch is main
+        run: |
+          if [ "$BRANCH_NAME" != "main" ]; then
+            echo "Not on main branch, exiting."
+            exit 1
+          fi
+
+      - name: Publish to NPM and JSR
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          branch: main
+          version: pnpm ci:version
+          publish: pnpm ci:publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push git tags
+        run: git push --follow-tags

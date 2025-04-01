@@ -8,11 +8,10 @@
   },
   "scripts": {
     "clean": "pnpm --recursive clean",
-    "prebuild": "pnpm run lint",
     "build": "pnpm --recursive build",
     "lint": "eslint . && tsc -p tsconfig.json",
     "test": "pnpm --recursive test",
-    "ci:version": "changeset version && pnpm exec tsx scripts/update-jsr-versions.ts",
+    "ci:version": "changeset version && pnpm exec tsx scripts/update-jsr-versions.ts && pnpm install --no-frozen-lockfile && pnpm run format",
     "ci:publish": "pnpm --recursive publish --provenance --access public --no-git-checks && pnpm --recursive exec jsr publish --allow-dirty && changeset tag"
   },
   "devDependencies": {
@@ -35,6 +34,7 @@
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
     "typescript-eslint": "8.23.0"
   }
 }
