@@ -1,5 +1,16 @@
 # @nvl/postcss-egal
 
+## 0.1.2
+
+### Patch Changes
+
+- [`3421039`](https://github.com/nvlang/egal/commit/3421039717086b53cf152e690cee0ef15f085410)
+  Thanks [@nvlang](https://github.com/nvlang)! - Re-release with updated CI.
+
+- Updated dependencies
+  [[`3421039`](https://github.com/nvlang/egal/commit/3421039717086b53cf152e690cee0ef15f085410)]:
+    - @nvl/egal@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes
