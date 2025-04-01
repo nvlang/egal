@@ -1,10 +1,15 @@
-import { describe, expect, expectTypeOf, test } from 'vitest';
+import {
+    describe,
+    expect,
+    // expectTypeOf,
+    test,
+} from 'vitest';
 import { test as fuzzyTest, fc } from '@fast-check/vitest';
 import Color from 'colorjs.io';
 import {
-    ColorSpaceConstants,
-    defaultOptions,
-    defaults,
+    // ColorSpaceConstants,
+    // defaultOptions,
+    // defaults,
     egal,
     ensureInRange,
     sanitizeChroma,
@@ -12,13 +17,13 @@ import {
     sanitizeHues,
     sanitizeLightness,
     sanitizePrecision,
-    Thresholds,
+    // Thresholds,
 } from '../src/egal.js';
 import type {
     ColorSpace,
     EgalOptions,
     FindChromaOptions,
-    Gamut,
+    // Gamut,
     OutputFormat,
 } from '../src/types.js';
 
