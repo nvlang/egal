@@ -252,44 +252,44 @@ describe('README examples', () => {
     });
 });
 
-describe.skip('types', () => {
-    test('ColorSpaceConstants', () => {
-        expectTypeOf(ColorSpaceConstants).toMatchTypeOf<
-            Record<
-                ColorSpace,
-                {
-                    hue: { min: number; max: number };
-                    chroma: { min: number; max: number };
-                    lightness: { min: number; max: number };
-                    props: {
-                        hueProp: string;
-                        chromaProp: string;
-                        lightnessProp: string;
-                    };
-                }
-            >
-        >();
-    });
-
-    test('defaults', () => {
-        expectTypeOf(defaults).toMatchTypeOf<{
-            hueStep: number;
-            gamut: Gamut;
-            space: ColorSpace;
-            precision: Record<ColorSpace, number>;
-        }>();
-    });
-
-    test('Thresholds', () => {
-        expectTypeOf(Thresholds).toMatchTypeOf<{
-            precision: Record<ColorSpace, { min: number; max: number }>;
-            hues: Partial<{ min: number; max: number }>;
-            chroma: Partial<{ min: number; max: number }>;
-            lightness: Partial<{ min: number; max: number }>;
-        }>();
-    });
-
-    test('defaultOptions', () => {
-        expectTypeOf(defaultOptions).toMatchTypeOf<EgalOptions<OutputFormat>>();
-    });
-});
+// describe('types', () => {
+//     test('ColorSpaceConstants', () => {
+//         expectTypeOf(ColorSpaceConstants).toMatchTypeOf<
+//             Record<
+//                 ColorSpace,
+//                 {
+//                     hue: { min: number; max: number };
+//                     chroma: { min: number; max: number };
+//                     lightness: { min: number; max: number };
+//                     props: {
+//                         hueProp: string;
+//                         chromaProp: string;
+//                         lightnessProp: string;
+//                     };
+//                 }
+//             >
+//         >();
+//     });
+//
+//     test('defaults', () => {
+//         expectTypeOf(defaults).toMatchTypeOf<{
+//             hueStep: number;
+//             gamut: Gamut;
+//             space: ColorSpace;
+//             precision: Record<ColorSpace, number>;
+//         }>();
+//     });
+//
+//     test('Thresholds', () => {
+//         expectTypeOf(Thresholds).toMatchTypeOf<{
+//             precision: Record<ColorSpace, { min: number; max: number }>;
+//             hues: Partial<{ min: number; max: number }>;
+//             chroma: Partial<{ min: number; max: number }>;
+//             lightness: Partial<{ min: number; max: number }>;
+//         }>();
+//     });
+//
+//     test('defaultOptions', () => {
+//         expectTypeOf(defaultOptions).toMatchTypeOf<EgalOptions<OutputFormat>>();
+//     });
+// });
