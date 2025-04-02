@@ -89,6 +89,7 @@ relative to the aforementioned maximal chromaticity.
         <source media="(prefers-color-scheme: light)" srcset="res/oklch-vs-egal-fixed-lightness-light.svg">
         <img alt="Graph titled 'oklch( 0.5, [0,0.35], [0,360) )', with hue as x-axis and chroma as y-axis. The hue ranges from 0 to 360 degrees, and the chroma ranges from 0 to 0.35 on the left side, which is labeled 'oklch', and from 0% to 400% on the right side, which is labeled 'egal'. At coordinate (x,y), the graph shows a pixel of color `oklch(0.5,y,x)`, where y is understood with the oklch scale for chroma. Only colors which are visible in sRGB are shown in the graph, yielding a shape with a colorful but irregular top with occasional spikes, and a monotonous gray bottom. A dashed, white, straight horizontal line is drawn across this colorful shape around y coordinate 0.085 in the oklch scale and 100% in the egal scale, and intersects with the global minimum of the shape, around hue 200 degrees." src="res/oklch-vs-egal-fixed-lightness-light.svg" width="80%">
     </picture>
+    <br>
     <figcaption>
         <sub><i>At 50% lightness, the bottleneck for chroma is around hue 200 degrees.</i></sub>
     </figcaption>
@@ -105,6 +106,7 @@ lightnesses:
         <source media="(prefers-color-scheme: light)" srcset="res/oklch-vs-egal-fixed-hue-light.svg">
         <img alt="Graph titled 'oklch( [0,1], [0,0.35], 0 )', with lightness as x-axis and chroma as y-axis (both using the OkLCh scale). A pyramid-like shape colored bright magenta at the top, black at the bottom left corner, and white at the bottom right corner, with smooth color gradients between the corners, illustrates which colors in the range referred to by the title are visible in the sRGB gamut. Separately, a white line starting at the bottom left corner goes straight toward a peak at around lightness 80 and chroma 0.1, and then goes to the bottom right corner in a staight line from there. This line illustrates the chroma value on the OkLCh chroma scale that a chroma value of 100% in the egal reparametrization corresponds to as a function of the lightness." src="res/oklch-vs-egal-fixed-hue-light.svg" width="80%">
     </picture>
+    <br>
     <figcaption>
         <sub><i>What a chroma of 100% means for egal depends on the lightness.</i></sub>
     </figcaption>
