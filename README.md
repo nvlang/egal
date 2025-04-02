@@ -83,7 +83,8 @@ maps the absolute scale of chromaticity embedded in OkLCh into a scale that is
 relative to the aforementioned maximal chromaticity.
 
 <br>
-<figure align="center">
+<div align="center">
+<figure>
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset="res/oklch-vs-egal-fixed-lightness-dark.svg">
         <source media="(prefers-color-scheme: light)" srcset="res/oklch-vs-egal-fixed-lightness-light.svg">
@@ -94,13 +95,15 @@ relative to the aforementioned maximal chromaticity.
         <sub><i>At 50% lightness, the bottleneck for chroma is around hue 200 degrees.</i></sub>
     </figcaption>
 </figure>
+</div>
 <br>
 
 The tradeoff here is that we lose consistency of chromaticity values across
 lightnesses:
 
 <br>
-<figure align="center">
+<div align="center">
+<figure>
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset="res/oklch-vs-egal-fixed-hue-dark.svg">
         <source media="(prefers-color-scheme: light)" srcset="res/oklch-vs-egal-fixed-hue-light.svg">
@@ -111,6 +114,7 @@ lightnesses:
         <sub><i>What a chroma of 100% means for egal depends on the lightness.</i></sub>
     </figcaption>
 </figure>
+</div>
 <br>
 
 However, given that the consistency of chromaticity across lightness was still
