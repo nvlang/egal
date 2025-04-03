@@ -17,6 +17,16 @@ export type Parser = (
     overrideOptions?: EgalOptions<OutputFormat> | undefined;
 } | null;
 
+/**
+ * The options for the plugin.
+ *
+ * This interface extends the {@link EgalOptions | `EgalOptions`} interface from
+ * the `@nvl/egal` package. This is to allow the user to set custom defaults for
+ * the `egal` function, such as the color space to use.
+ *
+ * Other than that, there are a few options that are specific to the plugin,
+ * namely `parse`, `properties`, and `checkVariables`.
+ */
 export interface PluginOptions extends EgalOptions<OutputFormat> {
     /**
      * In essence, a function that parses a string like `'egal(12% 34% 56)'`
@@ -38,7 +48,9 @@ export interface PluginOptions extends EgalOptions<OutputFormat> {
      *
      * @remarks
      * It's important that, if the string to be parsed is already a valid CSS
-     * color, it be left alone.
+     * color, it be left alone. In other words, if you define a custom parser,
+     * please make sure to return `null` if the input string doesn't look like
+     * it should be modified by the plugin.
      */
     parse?: Parser;
 
