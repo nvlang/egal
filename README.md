@@ -161,8 +161,12 @@ also supported.
 
 ### Software
 
+-   [color.js](https://github.com/color-js/color.js): "Color conversion &
+    manipulation library by the editors of the CSS Color specifications"
 -   [ColorAide](https://github.com/facelessuser/coloraide): Object-oriented
     color manipulation library written purely in Python.
+-   [OKLCH Color Picker & Converter](https://oklch.com/): Online OkLCh color
+    picker and converter.
 -   [HCT Color Converter](https://www.hct-color-converter.com): Online HCT color
     converter.
 -   [HCT Color Picker](https://www.figma.com/community/plugin/1227923985322908257/hct-color-picker):
