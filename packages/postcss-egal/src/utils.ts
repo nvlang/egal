@@ -14,11 +14,11 @@ const re: RegExp = regex('im')`
     (^|\b)
     egal
     \s* \( \s*
-    (?<lightness>           \g<float>   ) \s*
-    (?<lightness_percent>   %           )?
+    (?<lightness>           \g<float> | none ) \s*
+    (?<lightness_percent>   %                )?
     \g<sep>
-    (?<chroma>              \g<float>   ) \s*
-    (?<chroma_percent>      %           )?
+    (?<chroma>              \g<float> | none ) \s*
+    (?<chroma_percent>      %                )?
     \g<sep>
     (?<hue>                 \g<float> | none )
     (                                           # optionally, target gamut
@@ -53,9 +53,9 @@ const re: RegExp = regex('im')`
 `;
 
 interface ParseResult {
-    lightness: `${number}`;
+    lightness: `${number}` | 'none';
     lightness_percent?: '%' | undefined;
-    chroma: `${number}`;
+    chroma: `${number}` | 'none';
     chroma_percent?: '%' | undefined;
     hue: `${number}` | 'none';
     gamut?: Gamut | undefined;
@@ -74,10 +74,16 @@ export const defaultParse: Parser = (val) => {
             gamut,
             json,
         } = res.groups as unknown as ParseResult;
-        let l: number = parseFloat(lightness);
-        if (lightness_percent) l /= 100;
-        let c: number = parseFloat(chroma);
-        if (chroma_percent) c /= 100;
+        let l: number = lightness === 'none' ? 0 : parseFloat(lightness);
+        if (lightness_percent) {
+            if (lightness === 'none') return null; // 'none%' is invalid
+            l /= 100;
+        }
+        let c: number = chroma === 'none' ? 0 : parseFloat(chroma);
+        if (chroma_percent) {
+            if (chroma === 'none') return null; // 'none%' is invalid
+            c /= 100;
+        }
         const h: number = hue === 'none' ? 0 : parseFloat(hue);
         const overrideOptions = (
             json ? JSON.parse(json) : {}

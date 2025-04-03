@@ -4,10 +4,14 @@ import { test as fuzzyTest, fc } from '@fast-check/vitest';
 
 describe('defaultParse', () => {
     test.each([
+        ['egal(none none none)', { l: 0, c: 0, h: 0, overrideOptions: {} }],
+        ['egal(none% none none)', null],
+        ['egal(none none% none)', null],
         ['egal(1 1 none)', { l: 1, c: 1, h: 0, overrideOptions: {} }],
         ['egal(1 1 0)', { l: 1, c: 1, h: 0, overrideOptions: {} }],
         ['egal(1. 1 0)', { l: 1, c: 1, h: 0, overrideOptions: {} }],
         ['egal(1 1. 0)', { l: 1, c: 1, h: 0, overrideOptions: {} }],
+        ['egal(1 none 0)', { l: 1, c: 0, h: 0, overrideOptions: {} }],
         [
             'egal(1 1 0, p3)',
             { l: 1, c: 1, h: 0, overrideOptions: { gamut: 'p3' } },
