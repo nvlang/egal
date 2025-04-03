@@ -38,7 +38,7 @@ const plugin: PluginCreator<PluginOptions> = (opts: PluginOptions = {}) => {
     parse ??= defaultParse;
     return {
         postcssPlugin: 'postcss-egal',
-        Declaration: (decl) => {
+        Declaration: (decl, { result }) => {
             if (
                 properties.includes(decl.prop) ||
                 (checkVariables && decl.variable)
@@ -50,6 +50,8 @@ const plugin: PluginCreator<PluginOptions> = (opts: PluginOptions = {}) => {
                         ...opts,
                         ...(overrideOptions ?? {}),
                     });
+                } else if (/(?:^|\b)[ée]gal(?:\b|_)/u.test(decl.value)) {
+                    decl.warn(result, "Couldn't parse egal color");
                 }
             }
         },
