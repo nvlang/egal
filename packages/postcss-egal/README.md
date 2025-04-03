@@ -138,4 +138,49 @@ For example:
 }
 ```
 
+
+### Example Usage
+
+You can then, for example, use `egal` to define a color palette in your CSS:
+
+```css
+:root {
+    /* Hue 0 degrees */
+    --egal-0-50: egal(95% 1 0);
+    --egal-0-100: egal(90% 1 0);
+    /* ... */
+    --egal-0-900: egal(10% 1 0);
+    --egal-0-950: egal(5% 1 0);
+
+    /* Hue 30 degrees */
+    --egal-30-50: egal(95% 1 30);
+    --egal-30-100: egal(90% 1 30);
+    /* ... */
+    --egal-30-900: egal(10% 1 30);
+    --egal-30-950: egal(5% 1 30);
+
+    /* ... */
+}
+
+/* If P3 is supported */
+@media (color-gamut: p3) {
+    :root {
+        --egal-0-50: egal(95% 1 0, p3);
+        --egal-0-100: egal(90% 1 0, p3);
+        /* ... */
+        --egal-0-900: egal(10% 1 0, p3);
+        --egal-0-950: egal(5% 1 0, p3);
+
+        /* Hue 30 degrees */
+        --egal-30-50: egal(95% 1 30, p3);
+        --egal-30-100: egal(90% 1 30, p3);
+        /* ... */
+        --egal-30-900: egal(10% 1 30, p3);
+        --egal-30-950: egal(5% 1 30, p3);
+
+        /* ... */
+    }
+}
+```
+
 [ESM-only]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
