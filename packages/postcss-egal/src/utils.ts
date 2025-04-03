@@ -4,6 +4,18 @@ import { regex } from 'regex';
 
 type Gamut = Exclude<EgalOptions<OutputFormat>['gamut'], undefined>;
 
+/**
+ * @see https://developer.mozilla.org/docs/Web/CSS/angle
+ */
+type CssAngleUnits = 'deg' | 'grad' | 'rad' | 'turn';
+
+const cssAngleUnitsToDegrees: Record<CssAngleUnits, number> = {
+    deg: 1,
+    grad: 360 / 400,
+    rad: 180 / Math.PI,
+    turn: 360,
+};
+
 const gamutRegexes: Record<Gamut, RegExp> = {
     srgb: /s?rgb/iu,
     p3: /p3/iu,
@@ -20,7 +32,8 @@ const re: RegExp = regex('im')`
     (?<chroma>              \g<float> | none ) \s*
     (?<chroma_percent>      %                )?
     \g<sep>
-    (?<hue>                 \g<float> | none )
+    (?<hue>                 \g<float> | none ) \s*
+    (?<hue_unit>            deg | grad | rad | turn )?
     (                                           # optionally, target gamut
         \g<sep>
         (?<gamut>
@@ -58,6 +71,7 @@ interface ParseResult {
     chroma: `${number}` | 'none';
     chroma_percent?: '%' | undefined;
     hue: `${number}` | 'none';
+    hue_unit?: CssAngleUnits | undefined;
     gamut?: Gamut | undefined;
     json?: string | undefined;
 }
@@ -71,6 +85,7 @@ export const defaultParse: Parser = (val) => {
             chroma,
             chroma_percent,
             hue,
+            hue_unit,
             gamut,
             json,
         } = res.groups as unknown as ParseResult;
@@ -84,7 +99,11 @@ export const defaultParse: Parser = (val) => {
             if (chroma === 'none') return null; // 'none%' is invalid
             c /= 100;
         }
-        const h: number = hue === 'none' ? 0 : parseFloat(hue);
+        let h: number = hue === 'none' ? 0 : parseFloat(hue);
+        if (hue_unit) {
+            if (hue === 'none') return null; // 'nonedeg' etc. is invalid
+            h *= cssAngleUnitsToDegrees[hue_unit];
+        }
         const overrideOptions = (
             json ? JSON.parse(json) : {}
         ) as EgalOptions<OutputFormat>;
