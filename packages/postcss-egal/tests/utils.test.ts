@@ -69,28 +69,28 @@ describe('defaultParse', () => {
 
     fuzzyTest.concurrent.prop([
         fc.constantFrom(...numbers, ...percentages),
-        fc.constantFrom(...separators),
+        fc.constantFrom(...whitespaces),
         fc.constantFrom(...numbers, ...percentages),
-        fc.constantFrom(...separators),
+        fc.constantFrom(...whitespaces),
         fc.constantFrom(...numbers),
-    ])('random LCh input', (l, sep1, c, sep2, h) => {
+    ])('random LCh input', (l, ws1, c, ws2, h) => {
         expect(
-            defaultParse(`egal(${l[0] + sep1 + c[0] + sep2 + h[0]})`, {}),
+            defaultParse(`egal(${l[0] + ws1 + c[0] + ws2 + h[0]})`, {}),
         ).toEqual({ l: l[1], c: c[1], h: h[1], overrideOptions: {} });
     });
 
     fuzzyTest.concurrent.prop([
         fc.constantFrom(...numbers, ...percentages),
-        fc.constantFrom(...separators),
+        fc.constantFrom(...whitespaces),
         fc.constantFrom(...numbers, ...percentages),
-        fc.constantFrom(...separators),
+        fc.constantFrom(...whitespaces),
         fc.constantFrom(...numbers),
-        fc.constantFrom(...separators),
+        fc.constantFrom(...whitespaces, ','),
         fc.constantFrom(...gamuts),
-    ])('random LCh + gamut input', (l, sep1, c, sep2, h, sep3, gamut) => {
+    ])('random LCh + gamut input', (l, ws1, c, ws2, h, sep3, gamut) => {
         expect(
             defaultParse(
-                `egal(${l[0] + sep1 + c[0] + sep2 + h[0] + sep3 + gamut[0]})`,
+                `egal(${l[0] + ws1 + c[0] + ws2 + h[0] + sep3 + gamut[0]})`,
                 {},
             ),
         ).toEqual({
@@ -102,7 +102,7 @@ describe('defaultParse', () => {
     });
 });
 
-const separators = [' ', ',', '\n', '\t', '\n\t', '\n  '] as const;
+const whitespaces = [' ', '\n', '\t', '\n\t', '\n  '] as const;
 
 const gamuts = [
     ['srgb', 'srgb'],

@@ -26,13 +26,13 @@ const re: RegExp = regex('im')`
     (^|\b)
     egal
     \s* \( \s*
-    (?<lightness>           \g<float> | none ) \s*
+    (?<lightness>           \g<float> | none )
     (?<lightness_percent>   %                )?
-    \g<sep>
-    (?<chroma>              \g<float> | none ) \s*
+    \s+
+    (?<chroma>              \g<float> | none )
     (?<chroma_percent>      %                )?
-    \g<sep>
-    (?<hue>                 \g<float> | none ) \s*
+    \s+
+    (?<hue>                 \g<float> | none )
     (?<hue_unit>            deg | grad | rad | turn )?
     (                                           # optionally, alpha value
         \s*? / \s*
