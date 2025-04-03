@@ -55,11 +55,11 @@
 ### Installation
 
 ```sh
-pnpm add -D @nvl/postcss-egal # If using PNPM
-bun  add -D @nvl/postcss-egal # If using Bun
-npm  add -D @nvl/postcss-egal # If using NPM
-yarn add -D @nvl/postcss-egal # If using Yarn
-deno add -D @nvl/postcss-egal # If using Deno
+pnpm add -D @nvl/postcss-egal     # If using PNPM
+bun  add -D @nvl/postcss-egal     # If using Bun
+npm  add -D @nvl/postcss-egal     # If using NPM
+yarn add -D @nvl/postcss-egal     # If using Yarn
+deno add -D jsr:@nvl/postcss-egal # If using Deno
 ```
 
 ### Usage
