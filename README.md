@@ -92,7 +92,7 @@ relative to the aforementioned maximal chromaticity.
     </picture>
     <br>
     <figcaption>
-        <sub><i>At 50% lightness, the bottleneck for chroma is around hue 200 degrees.</i></sub>
+        <i>At 50% lightness, the bottleneck for chroma is around hue 200 degrees.</i>
     </figcaption>
 </figure>
 </div>
@@ -111,7 +111,7 @@ lightnesses:
     </picture>
     <br>
     <figcaption>
-        <sub><i>What a chroma of 100% means for egal depends on the lightness.</i></sub>
+        <i>What a chroma of 100% means for egal depends on the lightness.</i>
     </figcaption>
 </figure>
 </div>
