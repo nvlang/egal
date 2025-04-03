@@ -55,11 +55,11 @@
 ### Installation
 
 ```sh
-pnpm add @nvl/egal # If using PNPM
-bun  add @nvl/egal # If using Bun
-npm  add @nvl/egal # If using NPM
-yarn add @nvl/egal # If using Yarn
-deno add @nvl/egal # If using Deno
+pnpm add @nvl/egal     # If using PNPM
+bun  add @nvl/egal     # If using Bun
+npm  add @nvl/egal     # If using NPM
+yarn add @nvl/egal     # If using Yarn
+deno add jsr:@nvl/egal # If using Deno
 ```
 
 ### Usage
