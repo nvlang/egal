@@ -34,6 +34,11 @@ const re: RegExp = regex('im')`
     \g<sep>
     (?<hue>                 \g<float> | none ) \s*
     (?<hue_unit>            deg | grad | rad | turn )?
+    (                                           # optionally, alpha value
+        \s*? / \s*
+        (?<alpha>           \g<float> | none )
+        (?<alpha_percent>   %                )?
+    )?
     (                                           # optionally, target gamut
         \g<sep>
         (?<gamut>
@@ -72,6 +77,8 @@ interface ParseResult {
     chroma_percent?: '%' | undefined;
     hue: `${number}` | 'none';
     hue_unit?: CssAngleUnits | undefined;
+    alpha?: `${number}` | 'none' | undefined;
+    alpha_percent?: '%' | undefined;
     gamut?: Gamut | undefined;
     json?: string | undefined;
 }
@@ -86,6 +93,8 @@ export const defaultParse: Parser = (val) => {
             chroma_percent,
             hue,
             hue_unit,
+            alpha,
+            alpha_percent,
             gamut,
             json,
         } = res.groups as unknown as ParseResult;
@@ -107,6 +116,14 @@ export const defaultParse: Parser = (val) => {
         const overrideOptions = (
             json ? JSON.parse(json) : {}
         ) as EgalOptions<OutputFormat>;
+        if (alpha) {
+            let a: number = alpha === 'none' ? 0 : parseFloat(alpha);
+            if (alpha_percent) {
+                if (alpha === 'none') return null; // 'none%' is invalid
+                a /= 100;
+            }
+            overrideOptions.opacity = a;
+        }
         if (gamut) {
             const g = Object.keys(gamutRegexes).find((key) =>
                 gamutRegexes[key as Gamut].test(gamut),

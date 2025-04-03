@@ -16,6 +16,31 @@ describe('defaultParse', () => {
         ['egal(1 1 60deg)', { l: 1, c: 1, h: 60, overrideOptions: {} }],
         ['egal(1 1 60grad)', { l: 1, c: 1, h: 54, overrideOptions: {} }],
         [
+            'egal(50% 80% 143 / .5)',
+            { l: 0.5, c: 0.8, h: 143, overrideOptions: { opacity: 0.5 } },
+        ],
+        [
+            'egal(50% 80% 143 / 0.5)',
+            { l: 0.5, c: 0.8, h: 143, overrideOptions: { opacity: 0.5 } },
+        ],
+        [
+            'egal(50% 80% 143 / 50%)',
+            { l: 0.5, c: 0.8, h: 143, overrideOptions: { opacity: 0.5 } },
+        ],
+        [
+            'egal(50% 80% 143 / 0)',
+            { l: 0.5, c: 0.8, h: 143, overrideOptions: { opacity: 0 } },
+        ],
+        [
+            'egal(50% 80% 143 / 0%)',
+            { l: 0.5, c: 0.8, h: 143, overrideOptions: { opacity: 0 } },
+        ],
+        [
+            'egal(50% 80% 143 / none)',
+            { l: 0.5, c: 0.8, h: 143, overrideOptions: { opacity: 0 } },
+        ],
+        ['egal(50% 80% 143 / none%)', null],
+        [
             'egal(1 1 1rad)',
             { l: 1, c: 1, h: 180 / Math.PI, overrideOptions: {} },
         ],
