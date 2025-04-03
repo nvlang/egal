@@ -23,23 +23,55 @@ describe('plugin', () => {
     test('processes egal color', async () => {
         expect(
             (
-                await processor.process('.egal { color: egal(50 30 10); }', {
+                await processor.process('.egal { color: egal(.5 .3 10); }', {
                     from: undefined,
                 })
             ).css,
-        ).toEqual(`.egal { color: ${egal(50, 30, 10)}; }`);
+        ).toEqual(`.egal { color: ${egal(0.5, 0.3, 10)}; }`);
     });
 
     test('processes egal in variable declaration', async () => {
         expect(
             (
                 await processor.process(
-                    ':root { --my-color: egal(50 30 10); }',
-                    {
-                        from: undefined,
-                    },
+                    ':root { --my-color: egal(50% 30% 10); }',
+                    { from: undefined },
                 )
             ).css,
-        ).toEqual(`:root { --my-color: ${egal(50, 30, 10)}; }`);
+        ).toEqual(`:root { --my-color: ${egal(0.5, 0.3, 10)}; }`);
+    });
+
+    test('ignores incorrectly used egal', async () => {
+        expect(
+            (
+                await processor.process('.my-class { color: egal; }', {
+                    from: undefined,
+                })
+            ).css,
+        ).toEqual('.my-class { color: egal; }');
+
+        expect(
+            (
+                await processor.process(':root { --my-color: egal; }', {
+                    from: undefined,
+                })
+            ).css,
+        ).toEqual(`:root { --my-color: egal; }`);
+    });
+});
+
+describe('plugin (with custom parser)', () => {
+    const processor = postcss([
+        egalPlugin({ parse: () => ({ l: 0.42, c: 1, h: 0 }) }),
+    ]);
+
+    test('processes egal color', async () => {
+        expect(
+            (
+                await processor.process('.egal { color: egal(.5 .3 10); }', {
+                    from: undefined,
+                })
+            ).css,
+        ).toEqual(`.egal { color: ${egal(0.42, 1, 0)}; }`);
     });
 });

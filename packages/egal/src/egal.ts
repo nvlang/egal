@@ -223,7 +223,6 @@ export function egal<OF extends OutputFormat = OutputFormat>(
         toeFunction !== undefined,
         lightness,
     );
-    if (space === 'oklch') lightness /= 100; // Convert to percentage.
     opacity = isNaN(opacity) ? 1 : ensureInRange(opacity, 0, 1);
 
     if (Array.isArray(hues)) {
@@ -261,9 +260,9 @@ export function egal<OF extends OutputFormat = OutputFormat>(
         cache.set(key, chromaFloor);
     }
 
-    // The chroma input should be interpreted as a percentage of the chroma
-    // floor. We're defining `adjustedChroma` as the resulting chroma value.
-    const adjustedChroma: number = chromaFloor * (chroma / 100);
+    // The chroma input should be interpreted as a fraction of the chroma floor.
+    // We're defining `adjustedChroma` as the resulting chroma value.
+    const adjustedChroma: number = chromaFloor * chroma;
 
     const color = new Color(space, [0, 0, 0]);
     color[space][ColorSpaceConstants[space].props.lightnessProp] = lightness;
