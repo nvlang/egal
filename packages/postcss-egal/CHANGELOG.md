@@ -1,5 +1,61 @@
 # @nvl/postcss-egal
 
+## 1.0.0
+
+### Major Changes
+
+- [`8ecb516`](https://github.com/nvlang/egal/commit/8ecb5164adc4a19a6b56d514dab49808644e1993)
+  Thanks [@nvlang](https://github.com/nvlang)! - In CSS, `oklch(1 0 0)` and
+  `oklch(100% 0 0)` are equivalent. We want this same behavior for egal.
+  However, the CSS syntax should mirror the JS/TS syntax for the function, i.e.,
+  calling `egal(1, 0, 0)` in JS/TS should be the same as writing `egal(1 0 0)`
+  in CSS. This was currently not the case, however, since the inputs of the egal
+  function were always being interpreted as percentages, both in JS/TS, but also
+  in CSS (in the case of CSS, this was independent of whether a percentage sign
+  was appended to the value or not). To fix this, we make the JS/TS function
+  interpret its inputs as fractions, i.e., if we call `egal(1, 0, 0)` in JS/TS,
+  it'll be equivalent to writing `egal(100% 0 0)` or `egal(1 0 0)` in CSS.
+
+- [`f0aa004`](https://github.com/nvlang/egal/commit/f0aa004b2d756e8cecb78dee852cb202c6b6fe82)
+  Thanks [@nvlang](https://github.com/nvlang)! - Make default parser stricter:
+
+    - Forbid using commas between the lightness, chroma, and hue values.
+    - Forbid whitespace between the lightness and the optional percentage sign.
+    - Forbid whitespace between the chroma and the optional percentage sign.
+    - Forbid whitespace between the hue and the optional angle unit.
+
+### Minor Changes
+
+- [`f0aa004`](https://github.com/nvlang/egal/commit/f0aa004b2d756e8cecb78dee852cb202c6b6fe82)
+  Thanks [@nvlang](https://github.com/nvlang)! - Make the default parser support
+  `none` values for lightness or chroma.
+
+- [`8ecb516`](https://github.com/nvlang/egal/commit/8ecb5164adc4a19a6b56d514dab49808644e1993)
+  Thanks [@nvlang](https://github.com/nvlang)! - Improves the parser for the
+  PostCSS plugin, adding support for specifying the targeted color gamut or even
+  arbitrary ad hoc egal options in each occurrence of egal in CSS. Also makes
+  the parser more maintainable by using the amazing
+  [`regex`](https://www.npmjs.com/package/regex) package.
+
+- [`7d49103`](https://github.com/nvlang/egal/commit/7d49103de80e10f1c3f0a08fb76307879819a953)
+  Thanks [@nvlang](https://github.com/nvlang)! - Print a warning when the plugin
+  suspects that the user tried to specify a color with egal, but the parsing
+  failed.
+
+- [`f0aa004`](https://github.com/nvlang/egal/commit/f0aa004b2d756e8cecb78dee852cb202c6b6fe82)
+  Thanks [@nvlang](https://github.com/nvlang)! - Make default parser support
+  angle units for hues.
+
+- [`f0aa004`](https://github.com/nvlang/egal/commit/f0aa004b2d756e8cecb78dee852cb202c6b6fe82)
+  Thanks [@nvlang](https://github.com/nvlang)! - Make default parser support
+  specifying color opacity via the usual `... / <alpha>` CSS syntax.
+
+### Patch Changes
+
+- Updated dependencies
+  [[`8ecb516`](https://github.com/nvlang/egal/commit/8ecb5164adc4a19a6b56d514dab49808644e1993)]:
+    - @nvl/egal@1.0.0
+
 ## 0.1.3
 
 ### Patch Changes
