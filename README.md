@@ -61,9 +61,8 @@
 
 Color spaces like OkLCh and HCT aim to be perceptually uniform, and they can be
 incredibly useful if consistency of lightness across hues is important. However,
-it can be difficult to ensure consistency of chromaticity (saturation) across
-hues. This is because not all hues can deliver the same chromaticity at a given
-lightness.
+it can be difficult to ensure consistency of chroma (saturation) across hues.
+This is because not all hues can deliver the same chroma at a given lightness.
 
 For example, if you take the color `oklch(50% 0.275 280)`
 ![#5627f8](https://placehold.co/12/5627f8/0000), you get a very saturated
@@ -75,12 +74,13 @@ fall back to `oklch(50% 0.0848 200)`
 ### Idea
 
 Now, how can we make colors of different hues but equal lightness appear equally
-saturated? One way, of course, is to set the saturation to zero, but this.
-Alternatively, one can try to find the largest chromaticity value that all the
-different hues can still deliver at the given lightness. That's precisely what
-_égal_ (IPA /e.ɡal/ — from French, meaning "equal" or "indifferent") does. It
-maps the absolute scale of chromaticity embedded in OkLCh into a scale that is
-relative to the aforementioned maximal chromaticity.
+saturated? One way, of course, is to set the chroma to zero, but this would just
+yield the same shade of gray independent of hue. Alternatively, one can try to
+find the largest chroma value that all the different hues can still deliver at
+the given lightness. That's precisely what _égal_ (IPA /e.ɡal/ — from French,
+meaning "equal" or "indifferent") does. It maps the absolute scale of chroma
+embedded in OkLCh into a scale that is relative to the aforementioned maximal
+chroma.
 
 <br>
 <div align="center">
@@ -98,7 +98,7 @@ relative to the aforementioned maximal chromaticity.
 </div>
 <br>
 
-The tradeoff here is that we lose consistency of chromaticity values across
+The tradeoff here is that we lose consistency of chroma values across
 lightnesses:
 
 <br>
@@ -117,7 +117,7 @@ lightnesses:
 </div>
 <br>
 
-However, given that the consistency of chromaticity across lightness was still
+However, given that the consistency of chroma across lightness was still
 vulnerable to being broken by fallbacks arising from the limitations of the sRGB
 (or P3, Rec2020, etc.) color gamut, this tradeoff might not be as bas as it
 seems, depending on the use case.
@@ -126,15 +126,15 @@ seems, depending on the use case.
 
 As mentioned before, the core idea behind égal is as follows:
 
-> For a given lightness, find the largest chromaticity such that any hue will be
-> still able to deliver that chromaticity at the given lightness.
+> For a given lightness, find the largest chroma such that any hue will be still
+> able to deliver that chroma at the given lightness.
 
 Now, this can be generalized into the following:
 
 > For a given lightness $\ell$, provide a _linear_ mapping
 > $f_\ell\colon[0,\infty)\to[0,\infty)$ such that $f_\ell(0) = 0$ and
-> $f_\ell(100)$ equals the largest chromaticity such that, at the given lightness,
-> any hue will still be able to deliver that chromaticity.
+> $f_\ell(100)$ equals the largest chroma such that, at the given lightness, any
+> hue will still be able to deliver that chroma.
 
 These functions $f_\ell$ are then used to define a mapping into the input space
 of OkLCh as follows:
@@ -147,12 +147,12 @@ $$
 $$
 
 Note that these functions are sensitive to the color gamut that we are
-targeting, since the maximum chromaticity values directly depend on that gamut.
-This is because the gamut is what specifies when a color is no longer considered
+targeting, since the maximum chroma values directly depend on that gamut. This
+is because the gamut is what specifies when a color is no longer considered
 displayable. For example, P3 monitors are able to display more saturated colors
-than sRGB monitors, and therefore the maximum chromaticity values for P3 are
-larger than those for sRGB. Because of this, the target gamut can be specified
-as an option passed to the egal function.
+than sRGB monitors, and therefore the maximum chroma values for P3 are larger
+than those for sRGB. Because of this, the target gamut can be specified as an
+option passed to the egal function.
 
 Furthermore, if you prefer to use HCT instead of OkLCh behind the scenes, that's
 also supported.
