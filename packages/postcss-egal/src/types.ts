@@ -1,21 +1,41 @@
 import type { EgalOptions, OutputFormat } from '@nvl/egal';
+import type { DeclarationProps, WarningOptions } from 'postcss';
 
 export type Parser = (
     value: string,
     otherPluginOptions: Omit<PluginOptions, 'parse'>,
-) => {
-    /** Parsed lightness. Should be a number between 0 and 100, inclusive. */
-    l: number;
+    decl: DeclarationProps,
+) =>
+    | {
+          /** Parsed lightness. Should be a number between 0 and 100, inclusive. */
+          l: number;
 
-    /** Parsed chroma. Should be nonnegative. */
-    c: number;
+          /** Parsed chroma. Should be nonnegative. */
+          c: number;
 
-    /** Parsed hue. */
-    h: number;
+          /** Parsed hue. */
+          h: number;
 
-    /** Ad hoc overrides of egal options. */
-    overrideOptions?: EgalOptions<OutputFormat> | undefined;
-} | null;
+          /** Ad hoc overrides of egal options. */
+          overrideOptions?: EgalOptions<OutputFormat> | undefined;
+      }
+    | null
+    | ParserWarning;
+
+export interface ParserWarning {
+    /**
+     * @defaultValue
+     * ```ts
+     * "Couldn't parse egal color"
+     * ```
+     */
+    message?: string | undefined;
+
+    /**
+     * Options that'll be passed to the PostCSS warn function.
+     */
+    postcssWarningOptions?: WarningOptions | undefined;
+}
 
 /**
  * The options for the plugin.

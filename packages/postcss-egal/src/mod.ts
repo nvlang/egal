@@ -43,15 +43,21 @@ const plugin: PluginCreator<PluginOptions> = (opts: PluginOptions = {}) => {
                 properties.includes(decl.prop) ||
                 (checkVariables && decl.variable)
             ) {
-                const parsed = parse(decl.value, opts);
+                const parsed = parse(decl.value, opts, decl);
                 if (parsed) {
-                    const { l, c, h, overrideOptions } = parsed;
-                    decl.value = egal(l, c, h, {
-                        ...opts,
-                        ...(overrideOptions ?? {}),
-                    });
-                } else if (/(?:^|\b)[ée]gal(?:\b|_)/u.test(decl.value)) {
-                    decl.warn(result, "Couldn't parse egal color");
+                    if ('l' in parsed) {
+                        const { l, c, h, overrideOptions } = parsed;
+                        decl.value = egal(l, c, h, {
+                            ...opts,
+                            ...(overrideOptions ?? {}),
+                        });
+                    } else {
+                        decl.warn(
+                            result,
+                            parsed.message ?? "Couldn't parse egal color",
+                            parsed.postcssWarningOptions,
+                        );
+                    }
                 }
             }
         },
