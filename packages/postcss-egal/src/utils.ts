@@ -1,6 +1,8 @@
-import type { EgalOptions, OutputFormat } from '@nvl/egal';
-import type { Parser } from './types.js';
+import { egal, type EgalOptions, type OutputFormat } from '@nvl/egal';
+import type { PluginOptions, Transformer } from './types.js';
 import { regex } from 'regex';
+import MagicString from 'magic-string';
+import type { Declaration, Helpers } from 'postcss';
 
 type Gamut = Exclude<EgalOptions<OutputFormat>['gamut'], undefined>;
 
@@ -22,22 +24,28 @@ const gamutRegexes: Record<Gamut, RegExp> = {
     rec2020: /rec\.?2020/iu,
 };
 
-const re: RegExp = regex('im')`
-    (^|\b)
+const falseMatchRegex: RegExp = regex('gim')`
+    (?<![^\s:;,\(])
+    egal
+    \(
+`;
+
+const realMatchRegex: RegExp = regex('gim')`
+    (?<![^\s:;,\(])
     egal
     \s* \( \s*
     (?<lightness>           \g<float> | none )
-    (?<lightness_percent>   %                )?
+    (?<lightness_percent>   (?<!none) %      )?
     \s+
     (?<chroma>              \g<float> | none )
-    (?<chroma_percent>      %                )?
+    (?<chroma_percent>      (?<!none) %      )?
     \s+
     (?<hue>                 \g<float> | none )
-    (?<hue_unit>            deg | grad | rad | turn )?
+    (?<hue_unit>            (?<!none) ( deg | grad | rad | turn ) )?
     (                                           # optionally, alpha value
         \s*? / \s*
         (?<alpha>           \g<float> | none )
-        (?<alpha_percent>   %                )?
+        (?<alpha_percent>   (?<!none) %       )?
     )?
     (                                           # optionally, target gamut
         \g<sep>
@@ -70,7 +78,7 @@ const re: RegExp = regex('im')`
     )
 `;
 
-interface ParseResult {
+interface RegexGroups {
     lightness: `${number}` | 'none';
     lightness_percent?: '%' | undefined;
     chroma: `${number}` | 'none';
@@ -83,94 +91,90 @@ interface ParseResult {
     json?: string | undefined;
 }
 
-export const defaultParse: Parser = (val, _otherPluginOptions, decl) => {
-    const res: RegExpExecArray | null = re.exec(val);
-    if (res?.groups) {
-        const {
-            lightness,
-            lightness_percent,
-            chroma,
-            chroma_percent,
-            hue,
-            hue_unit,
-            alpha,
-            alpha_percent,
-            gamut,
-            json,
-        } = res.groups as unknown as ParseResult;
-        let l: number = lightness === 'none' ? 0 : parseFloat(lightness);
-        if (lightness_percent) {
-            if (lightness === 'none') {
-                return {
-                    message: 'none% is not a valid lightness',
-                    postcssWarningOptions: { word: 'none%' },
-                };
-            }
-            l /= 100;
-        }
-        let c: number = chroma === 'none' ? 0 : parseFloat(chroma);
-        if (chroma_percent) {
-            if (chroma === 'none') {
-                return {
-                    message: 'none% is not a valid chroma',
-                    postcssWarningOptions: { word: 'none%' },
-                };
-            }
-            c /= 100;
-        }
-        let h: number = hue === 'none' ? 0 : parseFloat(hue);
-        if (hue_unit) {
-            if (hue === 'none') {
-                return {
-                    message: `none${hue_unit} is not a valid hue`,
-                    postcssWarningOptions: { word: `none${hue_unit}` },
-                };
-            }
-            h *= cssAngleUnitsToDegrees[hue_unit];
-        }
-        const overrideOptions = (
-            json ? JSON.parse(json) : {}
-        ) as EgalOptions<OutputFormat>;
-        if (alpha) {
-            let a: number = alpha === 'none' ? 0 : parseFloat(alpha);
-            if (alpha_percent) {
-                if (alpha === 'none') {
-                    return {
-                        message: 'none% is not a valid opacity',
-                        postcssWarningOptions: { word: 'none%' },
-                    };
-                }
-                a /= 100;
-            }
-            overrideOptions.opacity = a;
-        }
-        if (gamut) {
-            const g = Object.keys(gamutRegexes).find((key) =>
-                gamutRegexes[key as Gamut].test(gamut),
-            ) as Gamut | undefined;
-            if (g) overrideOptions.gamut = g;
-        }
-        return { l, c, h, overrideOptions };
-    } else if (/(?:^|\s|[:;,{}(])egal\(/u.test(val)) {
-        let index = val.indexOf('egal(');
-        let endIndex = indexOfClosingParenthesis(val, index + 'egal'.length);
-        endIndex = endIndex === -1 ? index + 'egal('.length : endIndex + 1;
-        const shift = decl.prop.length + (decl.raws?.between?.length ?? 0);
-        index += shift;
-        endIndex += shift;
-        return {
-            message: "Couldn't parse egal color",
-            postcssWarningOptions: {
-                index,
-                endIndex,
-                plugin: '@nvl/postcss-egal',
-            },
-        };
+export const transformer: Transformer = (
+    decl,
+    { result },
+    otherPluginOptions,
+) => {
+    let value = decl.value;
+    const s = new MagicString(value);
+    let realMatch: RegExpExecArray | null;
+    let falseMatch: RegExpExecArray | null;
+
+    // First pass, where stuff is actually modified
+    while ((realMatch = realMatchRegex.exec(value))) {
+        processRealMatch({ magicString: s, realMatch, otherPluginOptions });
     }
-    return null; // Value is probably just not an egal color
+
+    value = s.toString();
+    decl.value = value;
+
+    while ((falseMatch = falseMatchRegex.exec(value))) {
+        processFalseMatch({
+            value,
+            falseMatch,
+            otherPluginOptions,
+            decl,
+            result,
+        });
+    }
 };
 
-function indexOfClosingParenthesis(
+function processFalseMatch({
+    value,
+    falseMatch,
+    decl,
+    result,
+}: {
+    value: string;
+    falseMatch: RegExpExecArray;
+    otherPluginOptions: PluginOptions;
+    decl: Declaration;
+    result: Helpers['result'];
+}) {
+    let index = falseMatch.index;
+    let endIndex =
+        indexOfClosingParenthesis(value, value.indexOf('(', index)) + 1;
+
+    const shift = decl.prop.length + (decl.raws.between?.length ?? 0);
+
+    const problemString = value.slice(index, endIndex);
+    for (const [ppr, message] of potentialProblems) {
+        const match: RegExpExecArray | null = ppr.exec(problemString);
+        if (match) {
+            index += match.index;
+            endIndex = index + match[0].length;
+
+            index += shift;
+            endIndex += shift;
+
+            decl.warn(result, message, { index, endIndex });
+            return;
+        }
+    }
+
+    index += shift;
+    endIndex += shift;
+
+    decl.warn(result, "Couldn't parse egal color", { index, endIndex });
+}
+
+const potentialProblems: [RegExp, string][] = [
+    [/none\s*%/u, 'none% is not a valid value'],
+    [
+        /(\d+\.?\d*|\d*\.\d+)\s+%/u,
+        'Whitespace between number and % is forbidden',
+    ],
+    [
+        regex('i')`['"](
+            ${gamutRegexes.srgb}|${gamutRegexes.p3}|${gamutRegexes.rec2020}
+        )['"]`,
+        "Don't use quotes around gamut",
+    ],
+    [regex('i')`"\{.*\}"`, 'Use single quotes around JSON object'],
+];
+
+export function indexOfClosingParenthesis(
     str: string,
     indexOfOpeningParenthesis: number,
 ): number {
@@ -186,4 +190,68 @@ function indexOfClosingParenthesis(
         }
     }
     return -1; // No closing parenthesis found
+}
+
+function processRealMatch({
+    magicString,
+    realMatch,
+    otherPluginOptions,
+}: {
+    magicString: MagicString;
+    realMatch: RegExpExecArray;
+    otherPluginOptions: PluginOptions;
+}) {
+    const {
+        lightness,
+        lightness_percent,
+        chroma,
+        chroma_percent,
+        hue,
+        hue_unit,
+        alpha,
+        alpha_percent,
+        gamut,
+        json,
+    } = realMatch.groups as unknown as RegexGroups;
+
+    let l: number = lightness === 'none' ? 0 : parseFloat(lightness);
+    if (lightness_percent) l /= 100;
+
+    let c: number = chroma === 'none' ? 0 : parseFloat(chroma);
+    if (chroma_percent) c /= 100;
+
+    let h: number = hue === 'none' ? 0 : parseFloat(hue);
+    if (hue_unit) h *= cssAngleUnitsToDegrees[hue_unit];
+
+    let overrideOptions: EgalOptions<OutputFormat> = {};
+
+    if (json) {
+        try {
+            overrideOptions = JSON.parse(json) as EgalOptions<OutputFormat>;
+        } catch {
+            return;
+        }
+    }
+
+    if (alpha) {
+        let a: number = alpha === 'none' ? 0 : parseFloat(alpha);
+        if (alpha_percent) a /= 100;
+        overrideOptions.opacity = a;
+    }
+
+    if (gamut) {
+        const g = Object.keys(gamutRegexes).find((key) =>
+            gamutRegexes[key as Gamut].test(gamut),
+        ) as Gamut | undefined;
+        if (g) overrideOptions.gamut = g;
+    }
+
+    magicString.overwrite(
+        realMatch.index,
+        realMatch.index + realMatch[0].length,
+        egal(l, c, h, {
+            ...otherPluginOptions,
+            ...overrideOptions,
+        }),
+    );
 }
