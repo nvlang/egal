@@ -191,13 +191,12 @@ export interface EgalOptions<OF extends OutputFormat> {
 
     /**
      * Precision with which to find the chroma. For example, a precision of
-     * `0.1` would ensure that the returned maximum chroma is within `0.1` of
-     * the actual maximum chroma.
-     *
-     * @defaultValue
-     * ```ts
-     * 0.1
-     * ```
+     * `0.01` would ensure that the returned maximum chroma is within `0.01` of
+     * the actual maximum chroma. The default value depends on the color space
+     * being used in the background; for `'oklch'`, it is `0.00001`, and for
+     * `'hct'`, it is `0.01`. That's because the HCT color space's chroma values
+     * usually range from 0 to around 150, whereas the OkLCh color space's
+     * chroma values range from 0 to around 0.4.
      */
     precision?: number;
 }
