@@ -70,9 +70,9 @@ For example:
 import { egal } from '@nvl/egal';
 
 const hues = [0, 60, 120, 180, 240, 300];
-const lightnesses = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+const lightnesses = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
 const palette = hues.map((hue) =>
-    lightnesses.map((lightness) => egal(lightness, 100, hue, { hues }))
+    lightnesses.map((lightness) => egal(lightness, 1, hue, { hues }))
 );
 console.log(palette);
 ```
