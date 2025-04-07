@@ -328,27 +328,27 @@ export const Thresholds = {
 export function sanitizePrecision(p: number, space: ColorSpace): number {
     if (!isFinite(p)) {
         console.warn(
-            `The 'precision' option should be a finite, positive number (received ${String(p)}); using the default instead (${defaults.precision[space]}).`,
+            `The 'precision' option should be a finite, positive number (received ${String(p)}); using the default for ${space.toUpperCase()} instead (${defaults.precision[space]}).`,
         );
         return defaults.precision[space];
     } else if (p === 0) {
         console.warn(
-            `The 'precision' option should not be set to 0; using the default instead (${defaults.precision[space]}).`,
+            `The 'precision' option should not be set to 0; using the default for ${space.toUpperCase()} instead (${defaults.precision[space]}).`,
         );
         return defaults.precision[space];
     } else if (p < 0) {
         console.warn(
-            `The 'precision' option should not be negative (received ${p}); using the default instead (${defaults.precision[space]}).`,
+            `The 'precision' option should not be negative (received ${p}); using the default for ${space.toUpperCase()} instead (${defaults.precision[space]}).`,
         );
         return defaults.precision[space];
     } else if (p < Thresholds.precision[space].min) {
         console.warn(
-            `The 'precision' option is very high (received ${p}); this may lead to performance issues. For example, the default precision is ${defaults.precision[space]}. Using ${Thresholds.precision[space].min} instead. To prevent this behavior, set 'guardrails' to false.`,
+            `The 'precision' option is very high (received ${p}); this may lead to performance issues. For example, the default precision for ${space.toUpperCase()} is ${defaults.precision[space]}. Using ${Thresholds.precision[space].min} instead. To prevent this behavior, set 'guardrails' to false.`,
         );
         return Thresholds.precision[space].min;
     } else if (p > Thresholds.precision[space].max) {
         console.warn(
-            `The 'precision' option is very low (received ${p}); this may lead to bad results. For example, the default precision is ${defaults.precision[space]}. Using ${Thresholds.precision[space].max} instead. To prevent this behavior, set 'guardrails' to false.`,
+            `The 'precision' option is very low (received ${p}); this may lead to bad results. For example, the default precision for ${space.toUpperCase()} is ${defaults.precision[space]}. Using ${Thresholds.precision[space].max} instead. To prevent this behavior, set 'guardrails' to false.`,
         );
         return Thresholds.precision[space].max;
     } else {
