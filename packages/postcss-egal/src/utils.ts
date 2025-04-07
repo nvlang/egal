@@ -136,6 +136,9 @@ function processFalseMatch({
     let endIndex =
         indexOfClosingParenthesis(value, value.indexOf('(', index)) + 1;
 
+    // I'm not sure how `decl.raws.between` would ever be `undefined`, so I'm
+    // choosing to exclude it from the test coverage report.
+    /* v8 ignore next 1 */
     const shift = decl.prop.length + (decl.raws.between?.length ?? 0);
 
     const problemString = value.slice(index, endIndex);
