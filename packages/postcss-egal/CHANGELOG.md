@@ -1,5 +1,29 @@
 # @nvl/postcss-egal
 
+## 2.0.0
+
+### Major Changes
+
+- [`8f562b6`](https://github.com/nvlang/egal/commit/8f562b63eef05b22b88160399b5d2204c73bc3be)
+  Thanks [@nvlang](https://github.com/nvlang)! - Revamp the transformer, fixing
+  some bugs and improving warnings.
+
+    **BREAKING CHANGE**: Custom parsers are no longer supported. This is to
+    simplify the API and code a bit, and because the transformer supports ad hoc
+    options by now.
+
+### Patch Changes
+
+- [`8052354`](https://github.com/nvlang/egal/commit/8052354f43269b67eb10d721c8afd03f12a37b29)
+  Thanks [@nvlang](https://github.com/nvlang)! - Improve module documentation
+  and README.
+
+- Updated dependencies
+  [[`a5d9126`](https://github.com/nvlang/egal/commit/a5d91266b053dc49b02cdb251b886d59faca9b17),
+  [`644e398`](https://github.com/nvlang/egal/commit/644e3988fcfb0a202667a75c43ccb00c8dbf6a2e),
+  [`9f9be3b`](https://github.com/nvlang/egal/commit/9f9be3b7e2c4ece9f77a7dcf02302fbd9a084a50)]:
+    - @nvl/egal@1.0.1
+
 ## 1.0.0
 
 ### Major Changes
