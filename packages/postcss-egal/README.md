@@ -64,9 +64,14 @@ deno add -D jsr:@nvl/postcss-egal # If using Deno
 
 ### Usage
 
-In `postcss.config.js`, add `@nvl/postcss-egal` to the plugins list:
+You can add `@nvl/postcss-egal` to your project as you would any other PostCSS plugin:
+
+<details>
+<summary><b>Add via PostCSS configuration</b></summary>
+<p></p>
 
 ```js
+// postcss.config.js
 export default {
     plugins: {
         '@nvl/postcss-egal': {
@@ -75,6 +80,32 @@ export default {
     }
 }
 ```
+
+</details>
+
+
+<details>
+<summary><b>Add via Vite configuration</b></summary>
+<p></p>
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import postcssEgal from '@nvl/postcss-egal';
+
+export default defineConfig({
+    css: {
+        postcss: {
+            plugins: [postcssEgal({
+                // Options...
+            })]
+        }
+    },
+});
+```
+
+</details>
+
 
 ### Syntax
 
@@ -109,11 +140,12 @@ the main difference being that you can be more generous with the chroma value;
 `oklch` chroma generally ranges from 0 to 0.4 or so, while `egal` chroma can
 easily range from 0 to 4 or more.
 
--   You can specify the **lightness** and **chroma** as percentages or plain numbers.
+-   You can specify the **lightness** and **chroma** as percentages or plain
+    numbers.
 -   You can specify the **hue** as a unitless number, in which case it will be
     interpreted as degrees, or as an angle with a unit that CSS understands
-    (`deg`, `grad`, `rad`, or `turn`, where
-    `360 deg = 400 grad = 2π rad = 1 turn`).
+    (`deg`, `grad`, `rad`, or `turn`, where `360deg = 400grad = 2π rad =
+    1turn`).
 -   You can optionally specify the **opacity** with the `/ <alpha>` syntax, but
     not as a fourth argument.
 -   You can optionally specify the target **gamut** by passing `srgb`, `p3`, or
@@ -145,42 +177,72 @@ You can then, for example, use `egal` to define a color palette in your CSS:
 
 ```css
 :root {
-    /* Hue 0 degrees */
-    --egal-0-50: egal(95% 1 0);
-    --egal-0-100: egal(90% 1 0);
+    --testcolor-50: egal(95% 1 30);
+    --testcolor-100: egal(90% 1 30);
     /* ... */
-    --egal-0-900: egal(10% 1 0);
-    --egal-0-950: egal(5% 1 0);
-
-    /* Hue 30 degrees */
-    --egal-30-50: egal(95% 1 30);
-    --egal-30-100: egal(90% 1 30);
-    /* ... */
-    --egal-30-900: egal(10% 1 30);
-    --egal-30-950: egal(5% 1 30);
-
-    /* ... */
+    --testcolor-900: egal(10% 1 30);
+    --testcolor-950: egal(5% 1 30);
 }
 
 /* If P3 is supported */
 @media (color-gamut: p3) {
     :root {
-        --egal-0-50: egal(95% 1 0, p3);
-        --egal-0-100: egal(90% 1 0, p3);
+        --testcolor-50: egal(95% 1 30, p3);
+        --testcolor-100: egal(90% 1 30, p3);
         /* ... */
-        --egal-0-900: egal(10% 1 0, p3);
-        --egal-0-950: egal(5% 1 0, p3);
-
-        /* Hue 30 degrees */
-        --egal-30-50: egal(95% 1 30, p3);
-        --egal-30-100: egal(90% 1 30, p3);
-        /* ... */
-        --egal-30-900: egal(10% 1 30, p3);
-        --egal-30-950: egal(5% 1 30, p3);
-
-        /* ... */
+        --testcolor-900: egal(10% 1 30, p3);
+        --testcolor-950: egal(5% 1 30, p3);
     }
 }
 ```
+
+You could then incorporate these variables into your TailwindCSS or UnoCSS configuration:
+
+<details>
+<summary><b>TailwindCSS (v4)</b></summary>
+
+Either [`@import`](https://tailwindcss.com/docs/functions-and-directives#import-directive) the colors into the CSS file containing the
+[`@theme` directive](https://tailwindcss.com/docs/functions-and-directives#theme-directive), or define them directly there. Then, you can
+[add the variables to the TailwindCSS theme](https://tailwindcss.com/docs/theme):
+
+```css
+@import 'tailwindcss';
+
+@theme {
+    --color-testcolor-50: var(--testcolor-50);
+    --color-testcolor-100: var(--testcolor-100);
+    /* ... */
+    --color-testcolor-900: var(--testcolor-900);
+    --color-testcolor-950: var(--testcolor-950);
+}
+```
+</details>
+
+<details>
+<summary><b>UnoCSS</b></summary>
+
+You can add the colors to your UnoCSS configuration via the [`theme` property](https://unocss.dev/config/theme):
+
+```ts
+// uno.config.ts
+import { defineConfig } from 'unocss';
+
+export default defineConfig({
+    theme: {
+        colors: {
+            testcolor: {
+                50: 'var(--testcolor-50)',
+                100: 'var(--testcolor-100)',
+                // ...
+                900: 'var(--testcolor-900)',
+                950: 'var(--testcolor-950)',
+            },
+        },
+    },
+});
+```
+
+</details>
+
 
 [ESM-only]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c

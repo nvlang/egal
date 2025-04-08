@@ -1,11 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * @packageDocumentation
- * The `postcss-egal` module has just one export (a default export, in fact),
- * which is a PostCSS plugin that replaces `egal` colors with their equivalent
- * CSS color.
+ * The `@nvl/postcss-egal` module has just one export (a default export, in
+ * fact), which is a PostCSS plugin that replaces `egal` colors with their
+ * equivalent CSS color.
  *
  * @example
+ * Usage in a PostCSS configuration file:
  * ```ts
  * // postcss.config.js
  * export default {
@@ -15,8 +16,29 @@
  * }
  * ```
  *
- * @module egalPlugin
+ * @example
+ * Usage in a Vite configuration file:
+ * ```
+ * // vite.config.ts
+ * import { defineConfig } from 'vite';
+ * import postcssEgal from '@nvl/postcss-egal';
+ *
+ * export default defineConfig({
+ *     // ...
+ *     css: {
+ *         postcss: {
+ *             plugins: [postcssEgal({
+ *                 // Options...
+ *             })]
+ *         }
+ *     },
+ *     // ...
+ * });
+ * ```
+ *
+ * @module postcssEgal
  */
+/* eslint-enable tsdoc/syntax */
 
 // External dependencies
 import type { PluginCreator } from 'postcss';
@@ -30,7 +52,9 @@ import { transformer } from './utils.js';
  * PostCSS plugin that replaces `egal` colors with their equivalent CSS
  * colors.
  */
-const plugin: PluginCreator<PluginOptions> = (opts: PluginOptions = {}) => {
+const postcssEgal: PluginCreator<PluginOptions> = (
+    opts: PluginOptions = {},
+) => {
     let { properties, checkVariables } = opts;
     properties ??= cssColorProperties;
     checkVariables ??= true;
@@ -51,6 +75,6 @@ const plugin: PluginCreator<PluginOptions> = (opts: PluginOptions = {}) => {
 
 const processedDeclarations = new WeakSet();
 
-plugin.postcss = true;
+postcssEgal.postcss = true;
 
-export default plugin;
+export default postcssEgal;
