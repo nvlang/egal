@@ -13,6 +13,7 @@ export default tseslint.config(
             '**/dist/**',
             '**/coverage/**',
             '**/html/**',
+            '**/tests/e2e/**',
         ],
     },
     eslint.configs.recommended,
