@@ -1,5 +1,22 @@
 # @nvl/egal
 
+## 1.0.1
+
+### Patch Changes
+
+- [`a5d9126`](https://github.com/nvlang/egal/commit/a5d91266b053dc49b02cdb251b886d59faca9b17)
+  Thanks [@nvlang](https://github.com/nvlang)! - Correct outdated values for
+  lightness and chroma in README example.
+
+- [`644e398`](https://github.com/nvlang/egal/commit/644e3988fcfb0a202667a75c43ccb00c8dbf6a2e)
+  Thanks [@nvlang](https://github.com/nvlang)! - Clarify in TSDoc comment that
+  the default precision depends on the color space being used in the background.
+  Also, use a better example value for the precision.
+
+- [`9f9be3b`](https://github.com/nvlang/egal/commit/9f9be3b7e2c4ece9f77a7dcf02302fbd9a084a50)
+  Thanks [@nvlang](https://github.com/nvlang)! - Clarify in warnings that the
+  default precision depends on the color space being used in the background.
+
 ## 1.0.0
 
 ### Major Changes
