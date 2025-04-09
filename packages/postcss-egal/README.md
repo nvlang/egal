@@ -18,9 +18,9 @@
 ](https://github.com/nvlang/egal)
 [
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/@nvl/postcss--egal-_?style=flat-square&logo=npm&logoColor=a3acb7&labelColor=21262d&color=21262d&logoSize=auto)">
-    <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/@nvl/postcss--egal-_?style=flat-square&logo=npm&logoColor=24292f&labelColor=eaeef2&color=eaeef2&logoSize=auto)">
-    <img alt="NPM package name" src="https://img.shields.io/badge/@nvl/postcss--egal-_?style=flat-square&logo=npm&logoColor=24292f&labelColor=eaeef2&color=eaeef2&logoSize=auto)">
+    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/@nvl/postcss--egal-_?style=flat-square&logo=npm&logoColor=a3acb7&labelColor=21262d&color=21262d&logoSize=auto">
+    <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/@nvl/postcss--egal-_?style=flat-square&logo=npm&logoColor=24292f&labelColor=eaeef2&color=eaeef2&logoSize=auto">
+    <img alt="NPM package name" src="https://img.shields.io/badge/@nvl/postcss--egal-_?style=flat-square&logo=npm&logoColor=24292f&labelColor=eaeef2&color=eaeef2&logoSize=auto">
 </picture>
 ](https://npmjs.com/@nvl/postcss-egal)
 [
