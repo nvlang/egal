@@ -17,8 +17,8 @@ export type Transformer = (
  * the `@nvl/egal` package. This is to allow the user to set custom defaults for
  * the `egal` function, such as the color space to use.
  *
- * Other than that, there are a few options that are specific to the plugin,
- * namely `parse`, `properties`, and `checkVariables`.
+ * Other than that, there are some options that are specific to the plugin,
+ * namely `properties` and `checkVariables`.
  */
 export interface PluginOptions extends EgalOptions<OutputFormat> {
     /**
