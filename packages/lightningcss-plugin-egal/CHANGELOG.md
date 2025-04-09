@@ -1,5 +1,12 @@
 # @nvl/lightningcss-plugin-egal
 
+## 1.0.1
+
+### Patch Changes
+
+- [`190571c`](https://github.com/nvlang/egal/commit/190571c3830342cc8c2fce35b63536bc79fc5797)
+  Thanks [@nvlang](https://github.com/nvlang)! - Fix badges in README.
+
 ## 1.0.0
 
 ### Major Changes
