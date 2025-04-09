@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import egalVisitor from '../src/mod.js';
+import egalVisitor, { type VisitorOptions } from '../src/mod.js';
 import { egal } from '@nvl/egal';
 import { test as fuzzyTest, fc } from '@fast-check/vitest';
 import { transform } from 'lightningcss';
@@ -18,12 +18,12 @@ describe('src+mod', () => {
     });
 });
 
-function process(input: string) {
+function process(input: string, options?: VisitorOptions) {
     return transform({
         code: Buffer.from(input),
         filename: 'test.css',
         minify: false,
-        visitor: egalVisitor,
+        visitor: egalVisitor(options),
     });
 }
 
@@ -119,42 +119,20 @@ describe('processing', () => {
     );
 });
 
-// describe('plugin options', () => {
-//     test.each([
-//         [
-//             { checkVariables: true },
-//             '--my-color: egal(50% 30% 10);',
-//             `--my-color: ${egal(0.5, 0.3, 10)};`,
-//         ],
-//         [{ checkVariables: false }, '--my-color: egal(50% 30% 10);'],
-//         [
-//             { properties: ['color'] },
-//             'color: egal(50% 30% 10);',
-//             `color: ${egal(0.5, 0.3, 10)};`,
-//         ],
-//         [{ properties: ['background'] }, 'color: egal(50% 30% 10);'],
-//     ] as [PluginOptions, string, string?][])('%o', (opts, input, output) => {
-//         output ??= input;
-//         const processor = postcss([egalVisitor(opts)]);
-//         const result = processor.process(input, { from: undefined });
-//         expect(result.css).toEqual(output);
-//         expect(result.warnings().length).toEqual(0);
-//     });
-
-//     test.each([
-//         { hues: 10 },
-//         { gamut: 'rec2020' },
-//         { opacity: 0.7 },
-//         { output: 'lab' },
-//         { precision: 0.01 },
-//         { space: 'hct' },
-//         { toeFunction: (l: number) => 0.9 * l },
-//     ] as PluginOptions[])('%o', (opts) => {
-//         const input = 'color: egal(50% 30% 10);';
-//         const output = `color: ${egal(0.5, 0.3, 10, opts)};`;
-//         const processor = postcss([egalVisitor(opts)]);
-//         const result = processor.process(input, { from: undefined });
-//         expect(result.css).toEqual(output);
-//         expect(result.warnings().length).toEqual(0);
-//     });
-// });
+describe('plugin options', () => {
+    test.each([
+        { hues: 10 },
+        { gamut: 'rec2020' },
+        { opacity: 0.7 },
+        { output: 'lab' },
+        { precision: 0.01 },
+        { space: 'hct' },
+        { toeFunction: (l: number) => 0.9 * l },
+    ] as VisitorOptions[])('%o', (opts) => {
+        const input = 'p{color: egal(50% 30% 10);}';
+        const output = `color: ${egal(0.5, 0.3, 10, opts).replaceAll(' 0.', ' .')};`;
+        const result = process(input, opts);
+        expect(result.code.toString()).toContain(output);
+        expect(result.warnings.length).toEqual(0);
+    });
+});

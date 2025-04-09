@@ -11,7 +11,7 @@ export default defineConfig({
     css: {
         transformer: 'lightningcss',
         lightningcss: {
-            visitor: egalVisitor,
+            visitor: egalVisitor(),
             targets: browserslistToTargets(browserslist('last 2 versions')),
         },
     },
