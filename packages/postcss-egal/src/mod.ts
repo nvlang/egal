@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * @packageDocumentation
- * The `@nvl/postcss-egal` module has just one export (a default export, in
- * fact), which is a PostCSS plugin that replaces `egal` colors with their
- * equivalent CSS color.
+ * The `@nvl/postcss-egal` module has just one non-type export (a default
+ * export, in fact), which is a PostCSS plugin that replaces `egal` colors with
+ * their equivalent CSS color.
  *
  * @example
  * Usage in a PostCSS configuration file:
@@ -76,5 +76,7 @@ const postcssEgal: PluginCreator<PluginOptions> = (
 const processedDeclarations = new WeakSet();
 
 postcssEgal.postcss = true;
+
+export type { PluginOptions } from './types.js';
 
 export default postcssEgal;
