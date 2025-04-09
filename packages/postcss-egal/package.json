@@ -1,6 +1,6 @@
 {
   "name": "@nvl/postcss-egal",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "PostCSS plugin to simplify uniformity in color saturation.",
   "type": "module",
   "author": {
