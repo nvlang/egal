@@ -1,6 +1,6 @@
 {
   "name": "@nvl/lightningcss-plugin-egal",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Lightning CSS plugin to simplify uniformity in color saturation.",
   "type": "module",
   "author": {
