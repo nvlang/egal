@@ -1,5 +1,12 @@
 # @nvl/postcss-egal
 
+## 2.1.0
+
+### Minor Changes
+
+- [`2c07abe`](https://github.com/nvlang/egal/commit/2c07abe99b7a4acca693a7dccd3075b5a5a643bf)
+  Thanks [@nvlang](https://github.com/nvlang)! - Export `PluginOptions` type.
+
 ## 2.0.1
 
 ### Patch Changes

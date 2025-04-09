@@ -1,5 +1,16 @@
 # @nvl/lightningcss-plugin-egal
 
+## 1.0.0
+
+### Major Changes
+
+- [`baf8129`](https://github.com/nvlang/egal/commit/baf8129223515c9940b5944c7e517caf6be37160)
+  Thanks [@nvlang](https://github.com/nvlang)! - BREAKING CHANGE: Support
+  passing options to visitor.
+
+    To migrate, make sure you are calling the `egalVisitor` function to obtain
+    the visitor to pass to Lightning CSS.
+
 ## 0.1.0
 
 ### Minor Changes
