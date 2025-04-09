@@ -1,5 +1,12 @@
 # @nvl/postcss-egal
 
+## 2.0.1
+
+### Patch Changes
+
+- [`6d407b7`](https://github.com/nvlang/egal/commit/6d407b7c503dd02bc8c742aa84477343543457b3)
+  Thanks [@nvlang](https://github.com/nvlang)! - Improve wording in README.
+
 ## 2.0.0
 
 ### Major Changes
