@@ -76,7 +76,11 @@ import egalVisitor from '@nvl/lightningcss-plugin-egal';
 export default defineConfig({
     css: {
         transformer: 'lightningcss',
-        lightningcss: { visitor: egalVisitor },
+        lightningcss: {
+            visitor: egalVisitor({
+                // Options...
+            }),
+        },
     },
 });
 ```

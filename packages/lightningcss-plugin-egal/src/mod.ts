@@ -1,7 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * @packageDocumentation
- * ...
+ * The `@nvl/lightningcss-plugin-egal` module has just one non-type export (a
+ * default export, in fact), which is a Lightning CSS visitor (i.e., plugin)
+ * that replaces `egal` colors with their equivalent CSS color.
  *
  * @module egalVisitor
  */
@@ -10,18 +12,34 @@
 import type { Angle, CustomAtRules, TokenOrValue, Visitor } from 'lightningcss';
 import { egal, type EgalOptions, type OutputFormat } from '@nvl/egal';
 
-const egalVisitor: Visitor<CustomAtRules> = {
-    Function: {
-        egal(fn) {
-            const args = astArgumentsToEgalArguments(fn.arguments);
-            if (args) {
-                return { raw: egal(...args) };
-            } else {
-                return undefined;
-            }
+/**
+ * Options for the egal visitor (i.e., plugin).
+ */
+export type VisitorOptions = EgalOptions<OutputFormat>;
+
+/**
+ * A visitor (i.e., plugin) for Lightning CSS that transforms calls to the
+ * `egal` CSS function into the output of the corresponding `egal` function
+ * call.
+ *
+ * @param options - Default options for the egal function.
+ * @returns A visitor that transforms `egal` function calls in CSS.
+ */
+function egalVisitor(options?: VisitorOptions): Visitor<CustomAtRules> {
+    return {
+        Function: {
+            egal(fn) {
+                const args = astArgumentsToEgalArguments(fn.arguments);
+                if (args) {
+                    if (options) args[3] = { ...options, ...args[3] };
+                    return { raw: egal(...args) };
+                } else {
+                    return undefined;
+                }
+            },
         },
-    },
-};
+    };
+}
 
 function astArgumentsToEgalArguments(
     args: TokenOrValue[],
