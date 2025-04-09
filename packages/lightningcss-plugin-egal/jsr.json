@@ -1,6 +1,6 @@
 {
   "name": "@nvl/lightningcss-plugin-egal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "exports": "./src/mod.ts",
   "license": "MIT",
   "publish": {
