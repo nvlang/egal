@@ -146,15 +146,14 @@ easily range from 0 to 4 or more.
     interpreted as degrees, or as an angle with a unit that CSS understands
     (`deg`, `grad`, `rad`, or `turn`, where `360deg = 400grad = 2π rad =
     1turn`).
--   You can optionally specify the **opacity** with the `/ <alpha>` syntax, but
-    not as a fourth argument.
+-   You can optionally specify the **opacity** with the `/ <alpha>` syntax.
 -   You can optionally specify the target **gamut** by passing `srgb`, `p3`, or
-    `rec2020` as a 4th argument. The default target gamut is to `srgb`.
+    `rec2020` as an additional argument. The default target gamut is to `srgb`.
 -   You can optionally specify additional options by passing a JSON object
-    surrounded by single quotes as the last argument (4th or 5th argument). Note
-    that if you specify a target gamut specified in the JSON object and a
-    different gamut as a 4th argument to the `egal` function, the gamut from the
-    4th argument will be used.
+    surrounded by single quotes as the last argument. Note that if you specify a
+    target gamut in the JSON object while a different gamut is specified in the
+    preceding argument to the `egal` function, the gamut from the preceding
+    argument will take precedence.
 
 For example:
 
