@@ -1,0 +1,59 @@
+{
+  "name": "@nvl/lightningcss-plugin-egal",
+  "version": "0.0.0",
+  "description": "Lightning CSS plugin to simplify uniformity in color saturation.",
+  "type": "module",
+  "author": {
+    "name": "N. V. Lang",
+    "email": "npm@nvlang.dev",
+    "url": "https://nvlang.dev/"
+  },
+  "license": "MIT",
+  "module": "./dist/mod.js",
+  "main": "./dist/mod.js",
+  "types": "./dist/mod.d.ts",
+  "private": false,
+  "keywords": [
+    "egal",
+    "colors",
+    "saturation",
+    "chroma",
+    "oklch",
+    "hct",
+    "lightningcss-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nvlang/egal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nvlang/egal/issues"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "@nvl/egal": "workspace:^1.0.1"
+  },
+  "scripts": {
+    "clean": "rimraf coverage dist tmp && true",
+    "prebuild": "pnpm lint",
+    "build": "pnpm run clean && tsc -p tsconfig.json",
+    "lint": "eslint . && tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --coverage --silent"
+  },
+  "devDependencies": {
+    "@fast-check/vitest": "^0.2.0",
+    "@types/node": "^22.13.17",
+    "@vitest/coverage-v8": "^3.1.1",
+    "@vitest/ui": "^3.1.1",
+    "lightningcss": "^1.29.3",
+    "vitest": "^3.1.1"
+  }
+}

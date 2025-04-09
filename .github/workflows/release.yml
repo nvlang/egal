@@ -69,6 +69,15 @@ jobs:
           directory: packages/postcss-egal/coverage/
           flags: postcss-egal
 
+      - name:
+          Upload coverage reports for `packages/lightningcss-plugin-egal` to
+          Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: packages/lightningcss-plugin-egal/coverage/
+          flags: lightningcss-plugin-egal
+
       - name: Determine current branch
         run:
           echo "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV

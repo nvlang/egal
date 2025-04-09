@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+
+@theme {
+    --color-testcolor-50: var(--testcolor-50);
+    --color-testcolor-100: var(--testcolor-100);
+    --color-testcolor-200: var(--testcolor-200);
+    --color-testcolor-300: var(--testcolor-300);
+    --color-testcolor-400: var(--testcolor-400);
+    --color-testcolor-500: var(--testcolor-500);
+    --color-testcolor-600: var(--testcolor-600);
+    --color-testcolor-700: var(--testcolor-700);
+    --color-testcolor-800: var(--testcolor-800);
+    --color-testcolor-900: var(--testcolor-900);
+    --color-testcolor-950: var(--testcolor-950);
+
+    /* ... */
+}
+
+:root {
+    --testcolor-50: egal(95% 1 0);
+    --testcolor-100: egal(90% 1 0);
+    --testcolor-200: egal(80% 1 0);
+    --testcolor-300: egal(70% 1 0);
+    --testcolor-400: egal(60% 1 0);
+    --testcolor-500: egal(50% 1 0);
+    --testcolor-600: egal(40% 1 0);
+    --testcolor-700: egal(30% 1 0);
+    --testcolor-800: egal(20% 1 0);
+    --testcolor-900: egal(10% 1 0);
+    --testcolor-950: egal(5% 1 0);
+}
+
+/* If P3 is supported */
+@media (color-gamut: p3) {
+    :root {
+        --testcolor-50: egal(95% 1 0, p3);
+        --testcolor-100: egal(90% 1 0, p3);
+        --testcolor-200: egal(80% 1 0, p3);
+        --testcolor-300: egal(70% 1 0, p3);
+        --testcolor-400: egal(60% 1 0, p3);
+        --testcolor-500: egal(50% 1 0, p3);
+        --testcolor-600: egal(40% 1 0, p3);
+        --testcolor-700: egal(30% 1 0, p3);
+        --testcolor-800: egal(20% 1 0, p3);
+        --testcolor-900: egal(10% 1 0, p3);
+        --testcolor-950: egal(5% 1 0, p3);
+    }
+}
