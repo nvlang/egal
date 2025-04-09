@@ -51,8 +51,9 @@
 
 > [!NOTE]
 > **Getting started**: Refer to the README of the
-> [standalone package](./packages/egal/README.md#getting-started) or
-> [PostCSS plugin](./packages/postcss-egal/README.md#getting-started),
+> [standalone package](./packages/egal/README.md#getting-started),
+> [PostCSS plugin](./packages/postcss-egal/README.md#getting-started), or
+> [Lightning CSS plugin](./packages/lightningcss-plugin-egal/README.md#getting-started),
 > depending on your use case.
 
 ## Why?
