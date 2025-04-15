@@ -175,13 +175,16 @@ export const defaultOptions = {
  * and a lightness of 100 will always result in white (`rgb(100%, 100%, 100%)`
  * or equivalent).
  * @param chroma - The chroma of the color. Must be a nonnegative number. Values
- * are interpreted as percentages of the maximal chroma _such that the chroma
- * can be maintained across the specified hues_. A chroma of 0 will result in a
+ * are interpreted as fractions of the maximal chroma _such that the chroma can
+ * be maintained across the specified hues_, such that a value of 1 yields said
+ * maximal chroma. Values larger than 1 are also allowed, but for some hues they
+ * might get clipped by the browser later on. A chroma of 0 will result in a
  * grayscale color.
  * @param hue - The hue of the color, in degrees. Must be between 0 and 360.
  * @param options - Options for the calculation.
  * @returns A string representing the color in the specified output format, such
- * that the color obeys CSS syntax and remains within the specified color gamut.
+ * that the color obeys CSS syntax and, if `chroma ≤ 1`, remains within the
+ * specified color gamut.
  */
 // -   **PRE:**
 //     -   `lightness ∈ ℝ ∪ {-∞, ∞, NaN}`
