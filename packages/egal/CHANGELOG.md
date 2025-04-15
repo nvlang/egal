@@ -1,5 +1,13 @@
 # @nvl/egal
 
+## 1.0.2
+
+### Patch Changes
+
+- [`1e0777d`](https://github.com/nvlang/egal/commit/1e0777d401d59f852ca9a4c31df124718702039e)
+  Thanks [@nvlang](https://github.com/nvlang)! - Correct parameter description
+  for chroma in TSDoc, and make some further small clarifications.
+
 ## 1.0.1
 
 ### Patch Changes
