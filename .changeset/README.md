@@ -6,7 +6,6 @@
 > Files should only be added to this folder with the `changeset` command.
 
 > [!INFO]
-
 > This folder is supposed to contain changesets for all changes made to the
 > codebase _since the last release_. When a release is made, the changeset bot
 > will, before the release is published, do the following:
