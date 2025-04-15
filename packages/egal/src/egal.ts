@@ -180,7 +180,8 @@ export const defaultOptions = {
  * maximal chroma. Values larger than 1 are also allowed, but for some hues they
  * might get clipped by the browser later on. A chroma of 0 will result in a
  * grayscale color.
- * @param hue - The hue of the color, in degrees. Must be between 0 and 360.
+ * @param hue - The hue of the color, in degrees. Must be a number between 0 and
+ * 360.
  * @param options - Options for the calculation.
  * @returns A string representing the color in the specified output format, such
  * that the color obeys CSS syntax and, if `chroma ≤ 1`, remains within the
