@@ -69,7 +69,7 @@ export const defaults = {
  * displayable in the specified color gamut (by default, `'srgb'`).
  *
  * @param hue - The hue of the color, in degrees. Must be between 0 and 360.
- * @param lightness - The lightness of the color. Must be between 0 and 100.
+ * @param lightness - The lightness of the color. Must be between 0 and 1.
  * @param opts - Options for calculating the maximum chroma.
  * @returns The maximum chroma that a color with the specified hue and lightness
  * can have in the specified viewing conditions.
@@ -96,7 +96,7 @@ export function findMaxChroma(
 
     const color = new Color({ space, coords: [0, 0, 0] });
     color[hueProp] = hue;
-    color[lightnessProp] = lightness;
+    color[lightnessProp] = lightness * ColorSpaceConstants[space].lightness.max;
 
     let chroma = 0;
 
@@ -120,7 +120,7 @@ export function findMaxChroma(
  * that lightness can have across the specified hues.
  *
  * @param lightness - The lightness for which to find the "chroma floor". Must
- * be between 0 and 100, both inclusive.
+ * be between 0 and 1, both inclusive.
  * @param opts - Options for the calculation the chroma floor.
  * @returns The chroma floor, i.e., the minimum of the maximum chromas for each
  * hue-lightness pair.
@@ -170,9 +170,9 @@ export const defaultOptions = {
 
 /**
  *
- * @param lightness - The lightness of the color. Must be between 0 and 100. A
+ * @param lightness - The lightness of the color. Must be between 0 and 1. A
  * lightness of 0 will always result in black (`rgb(0%, 0%, 0%)` or equivalent),
- * and a lightness of 100 will always result in white (`rgb(100%, 100%, 100%)`
+ * and a lightness of 1 will always result in white (`rgb(100%, 100%, 100%)`
  * or equivalent).
  * @param chroma - The chroma of the color. Must be a nonnegative number. Values
  * are interpreted as fractions of the maximal chroma _such that the chroma can
@@ -269,7 +269,8 @@ export function egal<OF extends OutputFormat = OutputFormat>(
     const adjustedChroma: number = chromaFloor * chroma;
 
     const color = new Color(space, [0, 0, 0]);
-    color[space][ColorSpaceConstants[space].props.lightnessProp] = lightness;
+    color[space][ColorSpaceConstants[space].props.lightnessProp] =
+        lightness * ColorSpaceConstants[space].lightness.max;
     color[space][ColorSpaceConstants[space].props.chromaProp] = adjustedChroma;
     color[space][ColorSpaceConstants[space].props.hueProp] = hue;
 
@@ -419,7 +420,7 @@ export function sanitizeChroma(c: number): number {
 
 /**
  * - **PRE:** `l ∈ ℝ ∪ {-∞, ∞, NaN}`
- * - **POST:** `output ∈ [0, Thresholds.lightness.max]`
+ * - **POST:** `output ∈ [0, 1]`
  *
  * @param l - The lightness to sanitize.
  * @param toeFn - Whether a toe function was applied to get `l`.
@@ -447,7 +448,7 @@ export function sanitizeLightness(
         );
         return 0;
     } else if (!isFinite(l)) {
-        const cleanLightness: number = l < 0 ? 0 : Thresholds.lightness.max;
+        const cleanLightness: number = l < 0 ? 0 : 1;
         console.warn(
             `The lightness value should be a finite nonnegative number (received ${
                 toeFn
@@ -465,15 +466,15 @@ export function sanitizeLightness(
             }); using 0 instead.`,
         );
         return 0;
-    } else if (l > Thresholds.lightness.max) {
+    } else if (l > 1) {
         console.warn(
-            `The lightness value should be at most ${Thresholds.lightness.max} (received ${
+            `The lightness value should be at most 1 (received ${
                 toeFn
                     ? `${l} (result of applying the toe function to ${lBeforeToeFn})`
                     : String(l)
-            }); using ${Thresholds.lightness.max} instead.`,
+            }); using 1 instead.`,
         );
-        return Thresholds.lightness.max;
+        return 1;
     } else {
         return l;
     }

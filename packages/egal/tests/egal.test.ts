@@ -28,6 +28,8 @@ import type {
 } from '../src/types.js';
 
 describe('egal', () => {
+    const toeFunction = (x: number) =>
+        (x ** 2 + 0.173 * x) / ((1.173 / 1.004) * (x + 0.004));
     test.concurrent.each([
         [0.5, 1, 0, undefined, 'oklch(50% 0.08501 0)'],
         [0.5, 1, 100, undefined, 'oklch(50% 0.08501 100)'],
@@ -61,6 +63,13 @@ describe('egal', () => {
             'oklch(12% 0.01287 56)',
         ],
         [0.12, 0.34, 56, { hues: [-123, 0, 123] }, 'oklch(12% 0.00894 56)'],
+        [0.12, 0.34, 56, { space: 'oklch' }, 'oklch(12% 0.00696 56)'],
+        [0.12, 0.34, 56, { toeFunction }, 'oklch(24.27% 0.01404 56)'],
+        [0.12, 0.34, 56, { space: 'hct' }, 'oklch(24.255% 0.01784 56.423)'],
+        [0.9, 1, 100, { toeFunction }, 'oklch(91.434% 0.04099 100)'],
+        [0.9, 1, 100, { space: 'hct' }, 'oklch(91.315% 0.04199 93.457)'],
+        [0.5, 1, 100, { toeFunction }, 'oklch(57.147% 0.09716 100)'],
+        [0.5, 1, 100, { space: 'hct' }, 'oklch(56.767% 0.10681 98.597)'],
     ] as [
         number,
         number,
@@ -138,17 +147,17 @@ fuzzyTest.concurrent.prop(
 describe('sanitizeLightness', () => {
     test.each([
         [NaN, false, NaN, 0],
-        [Infinity, false, Infinity, 100],
+        [Infinity, false, Infinity, 1],
         [-Infinity, false, -Infinity, 0],
-        [-10, false, -10, 0],
-        [110, false, 110, 100],
-        [50, false, 50, 50],
-        [NaN, true, 50, 0],
-        [Infinity, true, 50, 100],
-        [-Infinity, true, 50, 0],
-        [-10, true, 50, 0],
-        [110, true, 50, 100],
-        [50, true, 50, 50],
+        [-0.1, false, -0.1, 0],
+        [1.1, false, 1.1, 1],
+        [0.5, false, 0.5, 0.5],
+        [NaN, true, 0.5, 0],
+        [Infinity, true, 0.5, 1],
+        [-Infinity, true, 0.5, 0],
+        [-0.1, true, 0.5, 0],
+        [1.1, true, 0.5, 1],
+        [0.5, true, 0.5, 0.5],
     ])(
         'sanitizeLightness(%o, %o, %o) = %o',
         (l, toeFn, lBeforeToeFn, expected) => {
