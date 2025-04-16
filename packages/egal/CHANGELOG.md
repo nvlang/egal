@@ -1,5 +1,22 @@
 # @nvl/egal
 
+## 1.0.3
+
+### Patch Changes
+
+- [`6199b36`](https://github.com/nvlang/egal/commit/6199b3655442dc2420a6c5b20ceebca16d6d4f9d)
+  Thanks [@nvlang](https://github.com/nvlang)! - Fixes incorrect outputs when
+  using the HCT color space in the background. The incorrect outputs were caused
+  by bad handling of the lightness parameter. OkLCh and HCT have two different
+  input ranges for this parameter (0-1 for OkLCh and 0-100 for HCT), and the
+  library was not handling this correctly both when calculating the maximum
+  chroma nor when generating the output color.
+
+    Now, only lightness parameters between 0 and 1 (both inclusive) are
+    accepted, regardless of whether OkLCh or HCT is being used in the
+    background. For HCT, the lightness parameter will be multiplied by 100 to
+    yield the HCT "tone" value.
+
 ## 1.0.2
 
 ### Patch Changes
