@@ -1,6 +1,6 @@
 {
   "name": "@nvl/egal",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Reparametrization of OkLCh/HCT to simplify uniformity in color saturation.",
   "type": "module",
   "author": {
