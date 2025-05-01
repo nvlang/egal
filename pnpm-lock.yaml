@@ -82,8 +82,8 @@ importers:
         version: 11.1.0
     devDependencies:
       '@fast-check/vitest':
-        specifier: ^0.2.0
-        version: 0.2.0(vitest@3.1.1)
+        specifier: ^0.2.1
+        version: 0.2.1(vitest@3.1.1)
       '@types/node':
         specifier: ^22.13.17
         version: 22.13.17
@@ -104,8 +104,8 @@ importers:
         version: link:../egal
     devDependencies:
       '@fast-check/vitest':
-        specifier: ^0.2.0
-        version: 0.2.0(vitest@3.1.1)
+        specifier: ^0.2.1
+        version: 0.2.1(vitest@3.1.1)
       '@types/node':
         specifier: ^22.13.17
         version: 22.13.17
@@ -135,8 +135,8 @@ importers:
         version: 6.0.1
     devDependencies:
       '@fast-check/vitest':
-        specifier: ^0.2.0
-        version: 0.2.0(vitest@3.1.1)
+        specifier: ^0.2.1
+        version: 0.2.1(vitest@3.1.1)
       '@types/node':
         specifier: ^22.13.17
         version: 22.13.17
@@ -540,8 +540,8 @@ packages:
     resolution: {integrity: sha512-ZAoA40rNMPwSm+AeHpCq8STiNAwzWLJuP8Xv4CHIc9wv/PSuExjMrmjfYNj682vW0OOiZ1HKxzvjQr9XZIisQA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@fast-check/vitest@0.2.0':
-    resolution: {integrity: sha512-oVklBEHMh0u55bWRz2BQwQjDTT/QzAQh9m14zNLj6iq/UdBn2+C/GTwUsUVCfiCYjDu2ajMEeqP1ZGWCGRJ+Yw==}
+  '@fast-check/vitest@0.2.1':
+    resolution: {integrity: sha512-qbmGd1PC38iGvDjAY3WCpfQbWl60Bh0S5A/P60bFTVobyXzhYwq/3AtqVJWMRLnKHSfCDc2CSAApRUqrhVfcZQ==}
     peerDependencies:
       vitest: ^1 || ^2 || ^3
 
@@ -1210,8 +1210,8 @@ packages:
     resolution: {integrity: sha512-hMQ4CX1p1izmuLYyZqLMO/qGNw10wSv9QDCPfzXfyFrOaCSSoRfqE1Kf1s5an66J5JZC62NewG+mK49jOCtQew==}
     engines: {node: '>=4'}
 
-  fast-check@4.0.1:
-    resolution: {integrity: sha512-Z91jcH02ySQBQlKrCIs3tKTEHdkzOqQhHW5Mg4aZRo4lbI39a28jrFlik6FaRUNzm823VDDTtAi5AEV6lZZprQ==}
+  fast-check@4.1.1:
+    resolution: {integrity: sha512-8+yQYeNYqBfWem0Nmm7BUnh27wm+qwGvI0xln60c8RPM5rVekxZf/Ildng2GNBfjaG6utIebFmVBPlNtZlBLxg==}
     engines: {node: '>=12.17.0'}
 
   fast-deep-equal@3.1.3:
@@ -2666,9 +2666,9 @@ snapshots:
       '@eslint/core': 0.13.0
       levn: 0.4.1
 
-  '@fast-check/vitest@0.2.0(vitest@3.1.1)':
+  '@fast-check/vitest@0.2.1(vitest@3.1.1)':
     dependencies:
-      fast-check: 4.0.1
+      fast-check: 4.1.1
       vitest: 3.1.1(@types/node@22.13.17)(@vitest/ui@3.1.1)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)
 
   '@humanfs/core@0.19.1': {}
@@ -2987,6 +2987,7 @@ snapshots:
       magic-string: 0.30.17
     optionalDependencies:
       vite: 6.2.4(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)
+    optional: true
 
   '@vitest/pretty-format@3.1.1':
     dependencies:
@@ -3016,7 +3017,7 @@ snapshots:
       sirv: 3.0.1
       tinyglobby: 0.2.12
       tinyrainbow: 2.0.0
-      vitest: 3.1.1(@types/node@22.14.1)(@vitest/ui@3.1.1)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)
+      vitest: 3.1.1(@types/node@22.13.17)(@vitest/ui@3.1.1)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)
 
   '@vitest/utils@3.1.1':
     dependencies:
@@ -3404,7 +3405,7 @@ snapshots:
       iconv-lite: 0.4.24
       tmp: 0.0.33
 
-  fast-check@4.0.1:
+  fast-check@4.1.1:
     dependencies:
       pure-rand: 7.0.1
 
@@ -4219,6 +4220,7 @@ snapshots:
       - terser
       - tsx
       - yaml
+    optional: true
 
   vite@6.2.4(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3):
     dependencies:
@@ -4243,6 +4245,7 @@ snapshots:
       jiti: 2.4.2
       lightningcss: 1.29.3
       tsx: 4.19.3
+    optional: true
 
   vitest@3.1.1(@types/node@22.13.17)(@vitest/ui@3.1.1)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3):
     dependencies:
@@ -4321,6 +4324,7 @@ snapshots:
       - terser
       - tsx
       - yaml
+    optional: true
 
   wcwidth@1.0.1:
     dependencies:
