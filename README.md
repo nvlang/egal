@@ -120,7 +120,7 @@ lightnesses:
 
 However, given that the consistency of chroma across lightness was still
 vulnerable to being broken by fallbacks arising from the limitations of the sRGB
-(or P3, Rec2020, etc.) color gamut, this tradeoff might not be as bas as it
+(or P3, Rec2020, etc.) color gamut, this tradeoff might not be as bad as it
 seems, depending on the use case.
 
 ### In Detail
